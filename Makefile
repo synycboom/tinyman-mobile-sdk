@@ -19,6 +19,26 @@ ANDROID_SDK_VERSION := android-32
 ANDROID_NDK_VERSION := 24.0.8215888
 ANDROID_CMAKE_VERSION := 3.18.1
 
+development.osx:
+	# Setup command line tools for Android
+	rm -rf $(ANDROID_BUILD_TOOLS)
+	wget https://dl.google.com/android/repository/commandlinetools-mac-8092744_latest.zip
+	mkdir -p $(ANDROID_BUILD_TOOLS)/cmdline-tools
+	unzip commandlinetools-mac-8092744_latest -d $(ANDROID_BUILD_TOOLS)/cmdline-tools
+	rm commandlinetools-mac-8092744_latest.zip
+	mv $(ANDROID_BUILD_TOOLS)/cmdline-tools/cmdline-tools $(ANDROID_BUILD_TOOLS)/cmdline-tools/latest
+
+	# Install sdk, ndk, and cmake
+	$(ANDROID_SDK_MANAGER) --sdk_root=$(ANDROID_SDK_ROOT) --install "platforms;$(ANDROID_SDK_VERSION)"
+	$(ANDROID_SDK_MANAGER) --sdk_root=$(ANDROID_NDK_ROOT) --install "ndk;$(ANDROID_NDK_VERSION)"
+	$(ANDROID_SDK_MANAGER) --sdk_root=$(ANDROID_CMAKE_ROOT) --install "cmake;$(ANDROID_CMAKE_VERSION)"
+
+	# NDK 24+ does not contain abi16 any more. see [https://github.com/golang/go/issues/35030#issuecomment-1026887111]
+	ln -sf $(ANDROID_NDK_ROOT)/ndk/$(ANDROID_NDK_VERSION)/toolchains/llvm/prebuilt/darwin-x86_64/bin/i686-linux-android32-clang $(ANDROID_NDK_ROOT)/ndk/$(ANDROID_NDK_VERSION)/toolchains/llvm/prebuilt/darwin-x86_64/bin/i686-linux-android16-clang
+	ln -sf $(ANDROID_NDK_ROOT)/ndk/$(ANDROID_NDK_VERSION)/toolchains/llvm/prebuilt/darwin-x86_64/bin/i686-linux-android32-clang++ $(ANDROID_NDK_ROOT)/ndk/$(ANDROID_NDK_VERSION)/toolchains/llvm/prebuilt/darwin-x86_64/bin/i686-linux-android16-clang++
+	ln -sf $(ANDROID_NDK_ROOT)/ndk/$(ANDROID_NDK_VERSION)/toolchains/llvm/prebuilt/darwin-x86_64/bin/armv7a-linux-androideabi32-clang $(ANDROID_NDK_ROOT)/ndk/$(ANDROID_NDK_VERSION)/toolchains/llvm/prebuilt/darwin-x86_64/bin/armv7a-linux-androideabi16-clang
+	ln -sf $(ANDROID_NDK_ROOT)/ndk/$(ANDROID_NDK_VERSION)/toolchains/llvm/prebuilt/darwin-x86_64/bin/armv7a-linux-androideabi32-clang++ $(ANDROID_NDK_ROOT)/ndk/$(ANDROID_NDK_VERSION)/toolchains/llvm/prebuilt/darwin-x86_64/bin/armv7a-linux-androideabi16-clang++
+
 development.linux:
 	# Setup command line tools for Android
 	rm -r $(ANDROID_BUILD_TOOLS)
