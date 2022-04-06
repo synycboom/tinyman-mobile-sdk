@@ -14,4 +14,7 @@
 # Dependency directories (remove the comment below to include it)
 
 android-build-tools
+
 build
+
+release

@@ -2,6 +2,9 @@ SRC_PATH := $(shell pwd)
 MODULE := github.com/synycboom/tinyman-mobile-sdk/tinyman
 GO_MOBILE := golang.org/x/mobile/cmd/gomobile
 
+IOS_BUILD_PATH := $(SRC_PATH)/build/ios
+IOS_BUILD_FILE := $(IOS_BUILD_PATH)/Tinyman.xcframework
+
 ANDROID_BUILD_PATH := $(SRC_PATH)/build/android
 ANDROID_BUILD_AAR := $(ANDROID_BUILD_PATH)/tinyman.aar
 
@@ -40,8 +43,15 @@ init:
 	go run $(GO_MOBILE) init
 
 build.ios:
-	go run $(GO_MOBILE) bind -target=ios $(MODULE)
+	mkdir -p $(IOS_BUILD_PATH)
+	go run $(GO_MOBILE) bind -target=ios -o $(IOS_BUILD_FILE) $(MODULE)
 
 build.android:
 	mkdir -p $(ANDROID_BUILD_PATH)
 	ANDROID_HOME=$(ANDROID_SDK_ROOT) ANDROID_NDK_HOME=$(ANDROID_NDK_ROOT)/ndk/$(ANDROID_NDK_VERSION) go run $(GO_MOBILE) bind -target=android -o $(ANDROID_BUILD_AAR) $(MODULE)
+
+release:
+	@read -p "Enter new release version: " version; \
+	./misc/release.sh $$version $(ANDROID_SDK_ROOT) $(ANDROID_NDK_ROOT)/ndk/$(ANDROID_NDK_VERSION) $(GO_MOBILE) $(MODULE)
+
+.PHONY: development.linux init build.ios build.android release
