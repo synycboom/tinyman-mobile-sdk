@@ -8,13 +8,14 @@ import (
 
 // Asset is an Algorand token
 type Asset struct {
-	asset *types.Asset
+	wrappedAsset *types.Asset
 }
 
-// NewAsset creates an asset
+// NewAsset creates an asset. Note that id and decimals are strings here
+// Eventually they will be converted to 64-bit unsigned integers
 func NewAsset(id, decimals, name, unitName string) (*Asset, error) {
 	a := &Asset{
-		asset: &types.Asset{
+		wrappedAsset: &types.Asset{
 			Name:     name,
 			UnitName: unitName,
 		},
@@ -31,56 +32,56 @@ func NewAsset(id, decimals, name, unitName string) (*Asset, error) {
 	return a, nil
 }
 
-// SetID sets an id of the asset by converting a string to 64-bit unsigned integer
+// SetID sets an id of the asset the value will be converted to 64-bit unsigned integer
 func (a *Asset) SetID(value string) error {
 	id, err := strconv.ParseUint(value, 10, 64)
 	if err != nil {
 		return err
 	}
 
-	a.asset.ID = id
+	a.wrappedAsset.ID = id
 
 	return nil
 }
 
-// SetDecimals sets a decimals of the asset by converting a string to 64-bit unsigned integer
+// SetDecimals sets a decimals of the asset the value will be converted to 64-bit unsigned integer
 func (a *Asset) SetDecimals(value string) error {
 	decimals, err := strconv.ParseUint(value, 10, 64)
 	if err != nil {
 		return err
 	}
 
-	a.asset.Decimals = decimals
+	a.wrappedAsset.Decimals = decimals
 
 	return nil
 }
 
 // SetName sets a name of the asset
 func (a *Asset) SetName(value string) {
-	a.asset.Name = value
+	a.wrappedAsset.Name = value
 }
 
 // SetUnitName sets a unit name of the asset
 func (a *Asset) SetUnitName(value string) {
-	a.asset.UnitName = value
+	a.wrappedAsset.UnitName = value
 }
 
 // ID returns an id of the asset by converting a 64-bit unsigned integer to a string
 func (a *Asset) ID() string {
-	return strconv.FormatUint(a.asset.ID, 10)
+	return strconv.FormatUint(a.wrappedAsset.ID, 10)
 }
 
 // Decimals returns a decimals of the asset by converting a 64-bit unsigned integer to a string
 func (a *Asset) Decimals() string {
-	return strconv.FormatUint(a.asset.Decimals, 10)
+	return strconv.FormatUint(a.wrappedAsset.Decimals, 10)
 }
 
 // Name returns a name of the asset
 func (a *Asset) Name() string {
-	return a.asset.Name
+	return a.wrappedAsset.Name
 }
 
 // UnitName returns a unit name of the asset
 func (a *Asset) UnitName() string {
-	return a.asset.UnitName
+	return a.wrappedAsset.UnitName
 }
