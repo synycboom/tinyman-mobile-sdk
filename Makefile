@@ -74,4 +74,4 @@ release:
 	@read -p "Enter new release version: " version; \
 	./misc/release.sh $$version $(ANDROID_SDK_ROOT) $(ANDROID_NDK_ROOT)/ndk/$(ANDROID_NDK_VERSION) $(GO_MOBILE) $(MODULE)
 
-.PHONY: development.linux init build.ios build.android release
+.PHONY: development.osx development.linux init build.ios build.android release
