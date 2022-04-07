@@ -30,6 +30,11 @@ func (a *AssetAmountIterator) Next() *AssetAmount {
 	return nil
 }
 
+// Reset resets the iterator
+func (a *AssetAmountIterator) Reset() {
+	a.curr = 0
+}
+
 // AssetAmount represents an asset amount
 type AssetAmount struct {
 	wrappedAssetAmount *types.AssetAmount
