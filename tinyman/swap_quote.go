@@ -9,8 +9,6 @@ import (
 // SwapQuote represents a swap quote
 type SwapQuote struct {
 	wrapped *types.SwapQuote
-	// // Slippage is a slippage
-	// Slippage float64
 }
 
 // SwapType returns a swap type
@@ -20,17 +18,17 @@ func (s *SwapQuote) SwapType() string {
 
 // AmountIn returns an input asset amount
 func (s *SwapQuote) AmountIn() *AssetAmount {
-	return unwrapAssetAmount(s.wrapped.AmountIn)
+	return wrapAssetAmount(s.wrapped.AmountIn)
 }
 
 // AmountOut returns an output asset amount
 func (s *SwapQuote) AmountOut() *AssetAmount {
-	return unwrapAssetAmount(s.wrapped.AmountOut)
+	return wrapAssetAmount(s.wrapped.AmountOut)
 }
 
 // SwapFee returns a swap fee asset amount
 func (s *SwapQuote) SwapFee() *AssetAmount {
-	return unwrapAssetAmount(s.wrapped.SwapFee)
+	return wrapAssetAmount(s.wrapped.SwapFee)
 }
 
 // Slippage returns a slippage
@@ -45,7 +43,7 @@ func (s *SwapQuote) AssetAmountOutWithSlippage() (*AssetAmount, error) {
 		return nil, err
 	}
 
-	return unwrapAssetAmount(a), nil
+	return wrapAssetAmount(a), nil
 }
 
 // AssetAmountInWithSlippage returns a calculated input asset amount after applying the slippage
@@ -55,7 +53,7 @@ func (s *SwapQuote) AssetAmountInWithSlippage() (*AssetAmount, error) {
 		return nil, err
 	}
 
-	return unwrapAssetAmount(a), nil
+	return wrapAssetAmount(a), nil
 }
 
 // Price returns the price, the value is converted from float64 to string

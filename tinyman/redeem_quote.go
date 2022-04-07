@@ -9,7 +9,7 @@ type RedeemQuote struct {
 
 // AssetAmount returns an asset amount
 func (r *RedeemQuote) AssetAmount() *AssetAmount {
-	return unwrapAssetAmount(&r.wrapped.Amount)
+	return wrapAssetAmount(&r.wrapped.Amount)
 }
 
 // AssetAmount returns an asset amount

@@ -15,7 +15,7 @@ type BurnQuote struct {
 func (b *BurnQuote) AssetAmountsOutIterator() *AssetAmountIterator {
 	var aa []*AssetAmount
 	for _, v := range b.wrapped.AmountsOut {
-		aa = append(aa, unwrapAssetAmount(&v))
+		aa = append(aa, wrapAssetAmount(&v))
 	}
 
 	return &AssetAmountIterator{
@@ -33,7 +33,7 @@ func (b *BurnQuote) AssetAmountsOutWithSlippageIterator() (*AssetAmountIterator,
 
 	var aa []*AssetAmount
 	for _, v := range res {
-		aa = append(aa, unwrapAssetAmount(&v))
+		aa = append(aa, wrapAssetAmount(&v))
 	}
 
 	return &AssetAmountIterator{
@@ -44,7 +44,7 @@ func (b *BurnQuote) AssetAmountsOutWithSlippageIterator() (*AssetAmountIterator,
 
 // LiquidityAssetAmount returns a liquidity asset amount
 func (b *BurnQuote) LiquidityAssetAmount() *AssetAmount {
-	return unwrapAssetAmount(&b.wrapped.LiquidityAssetAmount)
+	return wrapAssetAmount(&b.wrapped.LiquidityAssetAmount)
 }
 
 // Slippage returns a slippage

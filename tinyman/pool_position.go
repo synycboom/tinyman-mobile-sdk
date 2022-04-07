@@ -95,17 +95,17 @@ func (a *PoolPosition) SetShare(value string) error {
 
 // AssetAmount1 is an asset amount 1
 func (a *PoolPosition) AssetAmount1() *AssetAmount {
-	return unwrapAssetAmount(&a.wrapped.Asset1)
+	return wrapAssetAmount(&a.wrapped.Asset1)
 }
 
 // AssetAmount2 is an asset amount 2
 func (a *PoolPosition) AssetAmount2() *AssetAmount {
-	return unwrapAssetAmount(&a.wrapped.Asset2)
+	return wrapAssetAmount(&a.wrapped.Asset2)
 }
 
 // LiquidityAssetAmount is a asset asset amount
 func (a *PoolPosition) LiquidityAssetAmount() *AssetAmount {
-	return unwrapAssetAmount(&a.wrapped.LiquidityAsset)
+	return wrapAssetAmount(&a.wrapped.LiquidityAsset)
 }
 
 // Share is a share of user which can be calculated as a percentage by (share * 100)

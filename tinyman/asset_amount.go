@@ -35,6 +35,11 @@ func (a *AssetAmountIterator) Reset() {
 	a.curr = 0
 }
 
+// Add adds an item to the iterator
+func (a *AssetAmountIterator) Add(item *AssetAmount) {
+	a.values = append(a.values, item)
+}
+
 // AssetAmount represents an asset amount
 type AssetAmount struct {
 	wrapped *types.AssetAmount
@@ -73,7 +78,7 @@ func (a *AssetAmount) SetAmount(value string) error {
 
 // Asset returns an asset
 func (a *AssetAmount) Asset() *Asset {
-	return unwrapAsset(a.wrapped.Asset)
+	return wrapAsset(a.wrapped.Asset)
 }
 
 // AssetAmount returns an asset by converting the underlying 64-bit unsigned integer to a string
@@ -81,20 +86,10 @@ func (a *AssetAmount) AssetAmount() string {
 	return strconv.FormatUint(a.wrapped.Amount, 10)
 }
 
-func unwrapAsset(wrappedAsset *types.Asset) *Asset {
-	a := &Asset{}
-	a.SetDecimals(strconv.FormatUint(wrappedAsset.Decimals, 10))
-	a.SetID(strconv.FormatUint(wrappedAsset.ID, 10))
-	a.SetName(wrappedAsset.Name)
-	a.SetUnitName(wrappedAsset.UnitName)
-
-	return a
+func wrapAsset(asset *types.Asset) *Asset {
+	return &Asset{wrapped: asset}
 }
 
-func unwrapAssetAmount(wrapped *types.AssetAmount) *AssetAmount {
-	a := NewAssetAmount()
-	a.SetAmount(strconv.FormatUint(wrapped.Amount, 10))
-	a.SetAsset(unwrapAsset(wrapped.Asset))
-
-	return a
+func wrapAssetAmount(assetAmount *types.AssetAmount) *AssetAmount {
+	return &AssetAmount{wrapped: assetAmount}
 }
