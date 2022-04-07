@@ -7,9 +7,9 @@ import (
 	"github.com/synycboom/tinyman-go-sdk/v1/prepare"
 )
 
-// BurnTransactions prepares a transaction group to burn the liquidity pool asset amount in exchange for pool assets.
+// PrepareBurnTransactions prepares a transaction group to burn the liquidity pool asset amount in exchange for pool assets.
 // validatorappID, asset1ID, asset2ID, liquidityAssetID, asset1Amount, asset2Amount, liquidityAssetAmount are converted to uint64
-func BurnTransactions(
+func PrepareBurnTransactions(
 	validatorAppID,
 	asset1ID,
 	asset2ID,

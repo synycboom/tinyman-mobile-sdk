@@ -7,9 +7,9 @@ import (
 	"github.com/synycboom/tinyman-go-sdk/v1/prepare"
 )
 
-// MintTransactions prepares a transaction group to mint the liquidity pool asset amount in exchange for pool assets.
+// PrepareMintTransactions prepares a transaction group to mint the liquidity pool asset amount in exchange for pool assets.
 // validatorappID, asset1ID, asset2ID, liquidityAssetID, asset1Amount, asset2Amount, liquidityAssetAmount are converted to uint64
-func MintTransactions(
+func PrepareMintTransactions(
 	validatorAppID,
 	asset1ID,
 	asset2ID,

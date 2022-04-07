@@ -7,9 +7,9 @@ import (
 	"github.com/synycboom/tinyman-go-sdk/v1/prepare"
 )
 
-// BootstrapTransactions prepares a transaction group to bootstrap a new pool
+// PrepareBootstrapTransactions prepares a transaction group to bootstrap a new pool
 // validatorAppID, asset1ID, asset2ID are converted to uint64
-func BootstrapTransactions(
+func PrepareBootstrapTransactions(
 	validatorAppID,
 	asset1ID,
 	asset2ID string,
