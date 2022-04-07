@@ -6,20 +6,15 @@ import (
 	"github.com/synycboom/tinyman-go-sdk/types"
 )
 
-// Reset resets the iterator
-func (a *AssetAmountIterator) Reset() {
-	a.curr = 0
-}
-
 // BurnQuote represents a burn quote
 type BurnQuote struct {
-	wrappedBurnQuote *types.BurnQuote
+	wrapped *types.BurnQuote
 }
 
 // AssetAmountsOutIterator returns an iterator for iterating output asset amounts
 func (b *BurnQuote) AssetAmountsOutIterator() *AssetAmountIterator {
 	var aa []*AssetAmount
-	for _, v := range b.wrappedBurnQuote.AmountsOut {
+	for _, v := range b.wrapped.AmountsOut {
 		aa = append(aa, unwrapAssetAmount(&v))
 	}
 
@@ -31,7 +26,7 @@ func (b *BurnQuote) AssetAmountsOutIterator() *AssetAmountIterator {
 
 // AssetAmountsOutWithSlippageIterator returns an iterator for iterating out asset amounts after applying the slippage
 func (b *BurnQuote) AssetAmountsOutWithSlippageIterator() (*AssetAmountIterator, error) {
-	res, err := b.wrappedBurnQuote.AmountsOutWithSlippage()
+	res, err := b.wrapped.AmountsOutWithSlippage()
 	if err != nil {
 		return nil, err
 	}
@@ -49,10 +44,10 @@ func (b *BurnQuote) AssetAmountsOutWithSlippageIterator() (*AssetAmountIterator,
 
 // LiquidityAssetAmount returns a liquidity asset amount
 func (b *BurnQuote) LiquidityAssetAmount() *AssetAmount {
-	return unwrapAssetAmount(&b.wrappedBurnQuote.LiquidityAssetAmount)
+	return unwrapAssetAmount(&b.wrapped.LiquidityAssetAmount)
 }
 
 // Slippage returns a slippage
 func (b *BurnQuote) Slippage() string {
-	return strconv.FormatFloat(b.wrappedBurnQuote.Slippage, 'f', -1, 64)
+	return strconv.FormatFloat(b.wrapped.Slippage, 'f', -1, 64)
 }

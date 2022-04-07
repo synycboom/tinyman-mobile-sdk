@@ -8,13 +8,13 @@ import (
 
 // PoolInfo represents pool information
 type PoolInfo struct {
-	wrappedPoolInfo *types.PoolInfo
+	wrapped *types.PoolInfo
 }
 
 // NewPoolInfo creates a pool information
 func NewPoolInfo() *PoolInfo {
 	return &PoolInfo{
-		wrappedPoolInfo: &types.PoolInfo{
+		wrapped: &types.PoolInfo{
 			Address:                         "",
 			Asset1ID:                        0,
 			Asset2ID:                        0,
@@ -38,7 +38,7 @@ func NewPoolInfo() *PoolInfo {
 
 // SetAddress sets an address of the pool
 func (p *PoolInfo) SetAddress(value string) {
-	p.wrappedPoolInfo.Address = value
+	p.wrapped.Address = value
 }
 
 // SetAsset1ID sets an asset1 id, the value will be converted to 64-bit unsigned integer
@@ -48,7 +48,7 @@ func (p *PoolInfo) SetAsset1ID(value string) error {
 		return err
 	}
 
-	p.wrappedPoolInfo.Asset1ID = pv
+	p.wrapped.Asset1ID = pv
 
 	return nil
 }
@@ -60,19 +60,19 @@ func (p *PoolInfo) SetAsset2ID(value string) error {
 		return err
 	}
 
-	p.wrappedPoolInfo.Asset2ID = pv
+	p.wrapped.Asset2ID = pv
 
 	return nil
 }
 
 // SetAsset1UnitName sets an asset1 unit name
 func (p *PoolInfo) SetAsset1UnitName(value string) {
-	p.wrappedPoolInfo.Asset1UnitName = value
+	p.wrapped.Asset1UnitName = value
 }
 
 // SetAsset2UnitName sets an asset1 unit name
 func (p *PoolInfo) SetAsset2UnitName(value string) {
-	p.wrappedPoolInfo.Asset2UnitName = value
+	p.wrapped.Asset2UnitName = value
 }
 
 // SetLiquidityAssetID sets a liquidity asset id, the value will be converted to 64-bit unsigned integer
@@ -82,14 +82,14 @@ func (p *PoolInfo) SetLiquidityAssetID(value string) error {
 		return err
 	}
 
-	p.wrappedPoolInfo.LiquidityAssetID = pv
+	p.wrapped.LiquidityAssetID = pv
 
 	return nil
 }
 
 // SetLiquidityAssetName sets a liquidity name
 func (p *PoolInfo) SetLiquidityAssetName(value string) {
-	p.wrappedPoolInfo.LiquidityAssetName = value
+	p.wrapped.LiquidityAssetName = value
 }
 
 // SetAsset1Reserves sets a liquidity asset id, the value will be converted to 64-bit unsigned integer
@@ -99,7 +99,7 @@ func (p *PoolInfo) SetAsset1Reserves(value string) error {
 		return err
 	}
 
-	p.wrappedPoolInfo.Asset1Reserves = pv
+	p.wrapped.Asset1Reserves = pv
 
 	return nil
 }
@@ -111,7 +111,7 @@ func (p *PoolInfo) SetAsset2Reserves(value string) error {
 		return err
 	}
 
-	p.wrappedPoolInfo.Asset2Reserves = pv
+	p.wrapped.Asset2Reserves = pv
 
 	return nil
 }
@@ -123,7 +123,7 @@ func (p *PoolInfo) SetIssuedLiquidity(value string) error {
 		return err
 	}
 
-	p.wrappedPoolInfo.IssuedLiquidity = pv
+	p.wrapped.IssuedLiquidity = pv
 
 	return nil
 }
@@ -135,7 +135,7 @@ func (p *PoolInfo) SetUnclaimedProtocolFee(value string) error {
 		return err
 	}
 
-	p.wrappedPoolInfo.UnclaimedProtocolFee = pv
+	p.wrapped.UnclaimedProtocolFee = pv
 
 	return nil
 }
@@ -147,7 +147,7 @@ func (p *PoolInfo) SetOutstandingAsset1Amount(value string) error {
 		return err
 	}
 
-	p.wrappedPoolInfo.OutstandingAsset1Amount = pv
+	p.wrapped.OutstandingAsset1Amount = pv
 
 	return nil
 }
@@ -159,7 +159,7 @@ func (p *PoolInfo) SetOutstandingAsset2Amount(value string) error {
 		return err
 	}
 
-	p.wrappedPoolInfo.OutstandingAsset2Amount = pv
+	p.wrapped.OutstandingAsset2Amount = pv
 
 	return nil
 }
@@ -171,7 +171,7 @@ func (p *PoolInfo) SetOutstandingLiquidityAssetAmount(value string) error {
 		return err
 	}
 
-	p.wrappedPoolInfo.OutstandingLiquidityAssetAmount = pv
+	p.wrapped.OutstandingLiquidityAssetAmount = pv
 
 	return nil
 }
@@ -183,7 +183,7 @@ func (p *PoolInfo) SetValidatorAppID(value string) error {
 		return err
 	}
 
-	p.wrappedPoolInfo.ValidatorAppID = pv
+	p.wrapped.ValidatorAppID = pv
 
 	return nil
 }
@@ -195,7 +195,7 @@ func (p *PoolInfo) SetAlgoBalance(value string) error {
 		return err
 	}
 
-	p.wrappedPoolInfo.AlgoBalance = pv
+	p.wrapped.AlgoBalance = pv
 
 	return nil
 }
@@ -207,92 +207,92 @@ func (p *PoolInfo) SetRound(value string) error {
 		return err
 	}
 
-	p.wrappedPoolInfo.Round = pv
+	p.wrapped.Round = pv
 
 	return nil
 }
 
 // Address is a pool address
 func (p *PoolInfo) Address() string {
-	return p.wrappedPoolInfo.Address
+	return p.wrapped.Address
 }
 
 // Asset1ID is an asset1 id
 func (p *PoolInfo) Asset1ID() string {
-	return strconv.FormatUint(p.wrappedPoolInfo.Asset1ID, 10)
+	return strconv.FormatUint(p.wrapped.Asset1ID, 10)
 }
 
 // Asset2ID is an asset2 id
 func (p *PoolInfo) Asset2ID() string {
-	return strconv.FormatUint(p.wrappedPoolInfo.Asset2ID, 10)
+	return strconv.FormatUint(p.wrapped.Asset2ID, 10)
 }
 
 // Asset1UnitName is an asset1 unit name
 func (p *PoolInfo) Asset1UnitName() string {
-	return p.wrappedPoolInfo.Asset1UnitName
+	return p.wrapped.Asset1UnitName
 }
 
 // Asset2UnitName is an asset2 unit name
 func (p *PoolInfo) Asset2UnitName() string {
-	return p.wrappedPoolInfo.Asset2UnitName
+	return p.wrapped.Asset2UnitName
 }
 
 // LiquidityAssetID is an asset id for the liquidity
 func (p *PoolInfo) LiquidityAssetID() string {
-	return strconv.FormatUint(p.wrappedPoolInfo.LiquidityAssetID, 10)
+	return strconv.FormatUint(p.wrapped.LiquidityAssetID, 10)
 }
 
 // LiquidityAssetName is an asset name for the liquidity
 func (p *PoolInfo) LiquidityAssetName() string {
-	return p.wrappedPoolInfo.LiquidityAssetName
+	return p.wrapped.LiquidityAssetName
 }
 
 // Asset1Reserves is an asset1's reserves value
 func (p *PoolInfo) Asset1Reserves() string {
-	return strconv.FormatUint(p.wrappedPoolInfo.Asset1Reserves, 10)
+	return strconv.FormatUint(p.wrapped.Asset1Reserves, 10)
 }
 
 // Asset2Reserves is an asset2's reserves value
 func (p *PoolInfo) Asset2Reserves() string {
-	return strconv.FormatUint(p.wrappedPoolInfo.Asset2Reserves, 10)
+	return strconv.FormatUint(p.wrapped.Asset2Reserves, 10)
 }
 
 // IssuedLiquidity is the total issued liquidity
 func (p *PoolInfo) IssuedLiquidity() string {
-	return strconv.FormatUint(p.wrappedPoolInfo.IssuedLiquidity, 10)
+	return strconv.FormatUint(p.wrapped.IssuedLiquidity, 10)
 }
 
 // UnclaimedProtocolFee is an unclaimed protocol fee
 func (p *PoolInfo) UnclaimedProtocolFee() string {
-	return strconv.FormatUint(p.wrappedPoolInfo.UnclaimedProtocolFee, 10)
+	return strconv.FormatUint(p.wrapped.UnclaimedProtocolFee, 10)
 }
 
 // OutstandingAsset1Amount is an outstanding asset1 amount
 func (p *PoolInfo) OutstandingAsset1Amount() string {
-	return strconv.FormatUint(p.wrappedPoolInfo.OutstandingAsset1Amount, 10)
+	return strconv.FormatUint(p.wrapped.OutstandingAsset1Amount, 10)
 }
 
 // OutstandingAsset2Amount is an outstanding asset2 amount
 func (p *PoolInfo) OutstandingAsset2Amount() string {
-	return strconv.FormatUint(p.wrappedPoolInfo.OutstandingAsset2Amount, 10)
+	return strconv.FormatUint(p.wrapped.OutstandingAsset2Amount, 10)
 }
 
 // OutstandingLiquidityAssetAmount is an outstanding liquidity asset amount
 func (p *PoolInfo) OutstandingLiquidityAssetAmount() string {
-	return strconv.FormatUint(p.wrappedPoolInfo.OutstandingLiquidityAssetAmount, 10)
+	return strconv.FormatUint(p.wrapped.OutstandingLiquidityAssetAmount, 10)
 }
 
 // ValidatorAppID is the validator app id
 func (p *PoolInfo) ValidatorAppID() string {
-	return strconv.FormatUint(p.wrappedPoolInfo.ValidatorAppID, 10)
+	return strconv.FormatUint(p.wrapped.ValidatorAppID, 10)
 }
 
 // AlgoBalance is a balance of the pool
 func (p *PoolInfo) AlgoBalance() string {
-	return strconv.FormatUint(p.wrappedPoolInfo.AlgoBalance, 10)
+	return strconv.FormatUint(p.wrapped.AlgoBalance, 10)
 }
 
 // Round is the latest fetch round
 func (p *PoolInfo) Round() string {
-	return strconv.FormatUint(p.wrappedPoolInfo.Round, 10)
+	return strconv.FormatUint(p.wrapped.Round, 10)
 }

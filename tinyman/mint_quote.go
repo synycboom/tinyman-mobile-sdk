@@ -8,13 +8,13 @@ import (
 
 // MintQuote represents a mint quote
 type MintQuote struct {
-	wrappedMintQuote *types.MintQuote
+	wrapped *types.MintQuote
 }
 
 // AssetAmountsInIterator returns an iterator for iterating input asset amounts
-func (b *MintQuote) AssetAmountsInIterator() *AssetAmountIterator {
+func (m *MintQuote) AssetAmountsInIterator() *AssetAmountIterator {
 	var aa []*AssetAmount
-	for _, v := range b.wrappedMintQuote.AmountsIn {
+	for _, v := range m.wrapped.AmountsIn {
 		aa = append(aa, unwrapAssetAmount(&v))
 	}
 
@@ -26,12 +26,12 @@ func (b *MintQuote) AssetAmountsInIterator() *AssetAmountIterator {
 
 // LiquidityAssetAmount returns a liquidity asset amount
 func (m *MintQuote) LiquidityAssetAmount() *AssetAmount {
-	return unwrapAssetAmount(&m.wrappedMintQuote.LiquidityAssetAmount)
+	return unwrapAssetAmount(&m.wrapped.LiquidityAssetAmount)
 }
 
 // LiquidityAssetAmountWithSlippage calculates liquidity asset after applying the slippage
 func (m *MintQuote) LiquidityAssetAmountWithSlippage() (*AssetAmount, error) {
-	assetAmount, err := m.wrappedMintQuote.LiquidityAssetAmountWithSlippage()
+	assetAmount, err := m.wrapped.LiquidityAssetAmountWithSlippage()
 	if err != nil {
 		return nil, err
 	}
@@ -40,6 +40,6 @@ func (m *MintQuote) LiquidityAssetAmountWithSlippage() (*AssetAmount, error) {
 }
 
 // Slippage returns a slippage
-func (b *MintQuote) Slippage() string {
-	return strconv.FormatFloat(b.wrappedMintQuote.Slippage, 'f', -1, 64)
+func (m *MintQuote) Slippage() string {
+	return strconv.FormatFloat(m.wrapped.Slippage, 'f', -1, 64)
 }

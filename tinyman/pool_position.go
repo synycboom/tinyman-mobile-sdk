@@ -9,13 +9,13 @@ import (
 
 // PoolPosition represents a user position in the pool
 type PoolPosition struct {
-	wrappedPoolPosition *types.PoolPosition
+	wrapped *types.PoolPosition
 }
 
 // NewPoolPosition createa a pool position
 func NewPoolPosition() *PoolPosition {
 	return &PoolPosition{
-		wrappedPoolPosition: &types.PoolPosition{
+		wrapped: &types.PoolPosition{
 			Asset1: types.AssetAmount{
 				Asset: &types.Asset{
 					ID:       0,
@@ -54,7 +54,7 @@ func (a *PoolPosition) SetAssetAmount1(asset *AssetAmount) error {
 		return fmt.Errorf("an asset amount cannot be nil")
 	}
 
-	a.wrappedPoolPosition.Asset1 = *asset.wrappedAssetAmount
+	a.wrapped.Asset1 = *asset.wrapped
 
 	return nil
 }
@@ -65,7 +65,7 @@ func (a *PoolPosition) SetAssetAmount2(asset *AssetAmount) error {
 		return fmt.Errorf("an asset amount cannot be nil")
 	}
 
-	a.wrappedPoolPosition.Asset2 = *asset.wrappedAssetAmount
+	a.wrapped.Asset2 = *asset.wrapped
 
 	return nil
 }
@@ -76,7 +76,7 @@ func (a *PoolPosition) SetLiquidityAssetAmount(asset *AssetAmount) error {
 		return fmt.Errorf("an asset amount cannot be nil")
 	}
 
-	a.wrappedPoolPosition.LiquidityAsset = *asset.wrappedAssetAmount
+	a.wrapped.LiquidityAsset = *asset.wrapped
 
 	return nil
 }
@@ -88,27 +88,27 @@ func (a *PoolPosition) SetShare(value string) error {
 		return err
 	}
 
-	a.wrappedPoolPosition.Share = pv
+	a.wrapped.Share = pv
 
 	return nil
 }
 
 // AssetAmount1 is an asset amount 1
 func (a *PoolPosition) AssetAmount1() *AssetAmount {
-	return unwrapAssetAmount(&a.wrappedPoolPosition.Asset1)
+	return unwrapAssetAmount(&a.wrapped.Asset1)
 }
 
 // AssetAmount2 is an asset amount 2
 func (a *PoolPosition) AssetAmount2() *AssetAmount {
-	return unwrapAssetAmount(&a.wrappedPoolPosition.Asset2)
+	return unwrapAssetAmount(&a.wrapped.Asset2)
 }
 
 // LiquidityAssetAmount is a asset asset amount
 func (a *PoolPosition) LiquidityAssetAmount() *AssetAmount {
-	return unwrapAssetAmount(&a.wrappedPoolPosition.LiquidityAsset)
+	return unwrapAssetAmount(&a.wrapped.LiquidityAsset)
 }
 
 // Share is a share of user which can be calculated as a percentage by (share * 100)
 func (a *PoolPosition) Share(value string) string {
-	return strconv.FormatFloat(a.wrappedPoolPosition.Share, 'f', -1, 64)
+	return strconv.FormatFloat(a.wrapped.Share, 'f', -1, 64)
 }

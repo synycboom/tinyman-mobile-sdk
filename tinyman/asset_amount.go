@@ -37,14 +37,14 @@ func (a *AssetAmountIterator) Reset() {
 
 // AssetAmount represents an asset amount
 type AssetAmount struct {
-	wrappedAssetAmount *types.AssetAmount
+	wrapped *types.AssetAmount
 }
 
 // NewAssetAmount creates a new asset amount. Note that amount is a string here
 // Eventually it will be converted to 64-bit unsigned integer
 func NewAssetAmount() *AssetAmount {
 	return &AssetAmount{
-		wrappedAssetAmount: &types.AssetAmount{},
+		wrapped: &types.AssetAmount{},
 	}
 }
 
@@ -54,7 +54,7 @@ func (a *AssetAmount) SetAsset(asset *Asset) error {
 		return fmt.Errorf("asset is required")
 	}
 
-	a.wrappedAssetAmount.Asset = asset.wrappedAsset
+	a.wrapped.Asset = asset.wrapped
 
 	return nil
 }
@@ -66,35 +66,35 @@ func (a *AssetAmount) SetAmount(value string) error {
 		return err
 	}
 
-	a.wrappedAssetAmount.Amount = amount
+	a.wrapped.Amount = amount
 
 	return nil
 }
 
 // Asset returns an asset
 func (a *AssetAmount) Asset() *Asset {
-	return unwrapAsset(a.wrappedAssetAmount.Asset)
+	return unwrapAsset(a.wrapped.Asset)
 }
 
 // AssetAmount returns an asset by converting the underlying 64-bit unsigned integer to a string
 func (a *AssetAmount) AssetAmount() string {
-	return strconv.FormatUint(a.wrappedAssetAmount.Amount, 10)
+	return strconv.FormatUint(a.wrapped.Amount, 10)
 }
 
 func unwrapAsset(wrappedAsset *types.Asset) *Asset {
-	asset := Asset{}
-	asset.SetDecimals(strconv.FormatUint(wrappedAsset.Decimals, 10))
-	asset.SetID(strconv.FormatUint(wrappedAsset.ID, 10))
-	asset.SetName(wrappedAsset.Name)
-	asset.SetUnitName(wrappedAsset.UnitName)
+	a := &Asset{}
+	a.SetDecimals(strconv.FormatUint(wrappedAsset.Decimals, 10))
+	a.SetID(strconv.FormatUint(wrappedAsset.ID, 10))
+	a.SetName(wrappedAsset.Name)
+	a.SetUnitName(wrappedAsset.UnitName)
 
-	return &asset
+	return a
 }
 
 func unwrapAssetAmount(wrapped *types.AssetAmount) *AssetAmount {
-	assetAmount := NewAssetAmount()
-	assetAmount.SetAmount(strconv.FormatUint(wrapped.Amount, 10))
-	assetAmount.SetAsset(unwrapAsset(wrapped.Asset))
+	a := NewAssetAmount()
+	a.SetAmount(strconv.FormatUint(wrapped.Amount, 10))
+	a.SetAsset(unwrapAsset(wrapped.Asset))
 
-	return assetAmount
+	return a
 }
