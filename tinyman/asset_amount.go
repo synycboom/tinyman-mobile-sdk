@@ -9,40 +9,23 @@ import (
 
 // AssetAmount represents an asset amount
 type AssetAmount struct {
-	asset              *Asset
 	wrappedAssetAmount *types.AssetAmount
 }
 
-//
 // NewAssetAmount creates a new asset amount. Note that amount is a string here
 // Eventually it will be converted to 64-bit unsigned integer
-func NewAssetAmount(asset *Asset, amount string) (*AssetAmount, error) {
-	if asset == nil {
-		return nil, fmt.Errorf("an asset cannot be nil")
+func NewAssetAmount() *AssetAmount {
+	return &AssetAmount{
+		wrappedAssetAmount: &types.AssetAmount{},
 	}
-
-	a := &AssetAmount{
-		asset: asset,
-		wrappedAssetAmount: &types.AssetAmount{
-			Asset:  asset.wrappedAsset,
-			Amount: 0,
-		},
-	}
-
-	if err := a.SetAmount(amount); err != nil {
-		return nil, err
-	}
-
-	return a, nil
 }
 
 // SetAsset sets an asset
 func (a *AssetAmount) SetAsset(asset *Asset) error {
 	if asset == nil {
-		return fmt.Errorf("an asset cannot be nil")
+		return fmt.Errorf("asset is required")
 	}
 
-	a.asset = asset
 	a.wrappedAssetAmount.Asset = asset.wrappedAsset
 
 	return nil
@@ -62,10 +45,28 @@ func (a *AssetAmount) SetAmount(value string) error {
 
 // Asset returns an asset
 func (a *AssetAmount) Asset() *Asset {
-	return a.asset
+	return unwrapAsset(a.wrappedAssetAmount.Asset)
 }
 
 // AssetAmount returns an asset by converting the underlying 64-bit unsigned integer to a string
 func (a *AssetAmount) AssetAmount() string {
 	return strconv.FormatUint(a.wrappedAssetAmount.Amount, 10)
+}
+
+func unwrapAsset(wrappedAsset *types.Asset) *Asset {
+	asset := Asset{}
+	asset.SetDecimals(strconv.FormatUint(wrappedAsset.Decimals, 10))
+	asset.SetID(strconv.FormatUint(wrappedAsset.ID, 10))
+	asset.SetName(wrappedAsset.Name)
+	asset.SetUnitName(wrappedAsset.UnitName)
+
+	return &asset
+}
+
+func unwrapAssetAmount(wrapped *types.AssetAmount) *AssetAmount {
+	assetAmount := NewAssetAmount()
+	assetAmount.SetAmount(strconv.FormatUint(wrapped.Amount, 10))
+	assetAmount.SetAsset(unwrapAsset(wrapped.Asset))
+
+	return assetAmount
 }

@@ -10,12 +10,6 @@ import (
 // PoolPosition represents a user position in the pool
 type PoolPosition struct {
 	wrappedPoolPosition *types.PoolPosition
-
-	asset1 *AssetAmount
-
-	asset2 *AssetAmount
-
-	liquidityAsset *AssetAmount
 }
 
 // NewPoolPosition createa a pool position
@@ -60,7 +54,6 @@ func (a *PoolPosition) SetAssetAmount1(asset *AssetAmount) error {
 		return fmt.Errorf("an asset amount cannot be nil")
 	}
 
-	a.asset1 = asset
 	a.wrappedPoolPosition.Asset1 = *asset.wrappedAssetAmount
 
 	return nil
@@ -72,7 +65,6 @@ func (a *PoolPosition) SetAssetAmount2(asset *AssetAmount) error {
 		return fmt.Errorf("an asset amount cannot be nil")
 	}
 
-	a.asset2 = asset
 	a.wrappedPoolPosition.Asset2 = *asset.wrappedAssetAmount
 
 	return nil
@@ -84,7 +76,6 @@ func (a *PoolPosition) SetLiquidityAssetAmount(asset *AssetAmount) error {
 		return fmt.Errorf("an asset amount cannot be nil")
 	}
 
-	a.liquidityAsset = asset
 	a.wrappedPoolPosition.LiquidityAsset = *asset.wrappedAssetAmount
 
 	return nil
@@ -104,17 +95,17 @@ func (a *PoolPosition) SetShare(value string) error {
 
 // AssetAmount1 is an asset amount 1
 func (a *PoolPosition) AssetAmount1() *AssetAmount {
-	return a.asset1
+	return unwrapAssetAmount(&a.wrappedPoolPosition.Asset1)
 }
 
 // AssetAmount2 is an asset amount 2
 func (a *PoolPosition) AssetAmount2() *AssetAmount {
-	return a.asset1
+	return unwrapAssetAmount(&a.wrappedPoolPosition.Asset2)
 }
 
 // LiquidityAssetAmount is a asset asset amount
 func (a *PoolPosition) LiquidityAssetAmount() *AssetAmount {
-	return a.liquidityAsset
+	return unwrapAssetAmount(&a.wrappedPoolPosition.LiquidityAsset)
 }
 
 // Share is a share of user which can be calculated as a percentage by (share * 100)
