@@ -21,4 +21,27 @@ const (
 
 	// MainnetValidatorAppId is an alias for the current Tinyman main net validator app id
 	MainnetValidatorAppId = MainnetValidatorAppIdV1_1
+
+	// SwapFixedInput is a fixed-input swap type
+	SwapFixedInput = "fixed-input"
+
+	// SwapFixedOutput is a fixed-output swap type
+	SwapFixedOutput = "fixed-output"
+
+	// AlgoTokenName is the algo token name
+	AlgoTokenName = "Algo"
+
+	// AlgoTokenUnitName is the algo token unit name
+	AlgoTokenUnitName = "ALGO"
+
+	// AlgoTokenDecimals is the algo token decimals
+	AlgoTokenDecimals = 6
+
+	TotalLiquidityTokens = 0xFFFFFFFFFFFFFFFF
+
+	LiquidityTokenDecimals = 6
+
+	LiquidityTokenUnitName = "TM1POOL"
+
+	LiquidityAssetUnitName = "TMPOOL11"
 )
