@@ -7,6 +7,29 @@ import (
 	"github.com/synycboom/tinyman-go-sdk/types"
 )
 
+// AssetAmountIterator is an iterator for iterating amounts
+type AssetAmountIterator struct {
+	curr   int
+	values []*AssetAmount
+}
+
+// HasNext return true if there are asset amounts to be iterated
+func (a *AssetAmountIterator) HasNext() bool {
+	return a.curr < len(a.values)
+}
+
+// Next returns the next a asset amount, returns nil if no asset amounts left
+func (a *AssetAmountIterator) Next() *AssetAmount {
+	if a.HasNext() {
+		idx := a.curr
+		a.curr += 1
+
+		return a.values[idx]
+	}
+
+	return nil
+}
+
 // AssetAmount represents an asset amount
 type AssetAmount struct {
 	wrappedAssetAmount *types.AssetAmount

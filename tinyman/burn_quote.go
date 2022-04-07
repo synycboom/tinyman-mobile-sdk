@@ -6,31 +6,8 @@ import (
 	"github.com/synycboom/tinyman-go-sdk/types"
 )
 
-// AmountsIterator is an iterator for iterating amounts
-type AmountsIterator struct {
-	curr   int
-	values []*AssetAmount
-}
-
-// HasNext return true if there are asset amounts to be iterated
-func (a *AmountsIterator) HasNext() bool {
-	return a.curr < len(a.values)
-}
-
-// Next returns the next a asset amount, returns nil if no asset amounts left
-func (a *AmountsIterator) Next() *AssetAmount {
-	if a.HasNext() {
-		idx := a.curr
-		a.curr += 1
-
-		return a.values[idx]
-	}
-
-	return nil
-}
-
 // Reset resets the iterator
-func (a *AmountsIterator) Reset() {
+func (a *AssetAmountIterator) Reset() {
 	a.curr = 0
 }
 
@@ -39,21 +16,21 @@ type BurnQuote struct {
 	wrappedBurnQuote *types.BurnQuote
 }
 
-// AmountsIterator returns an iterator for iterating out asset amounts
-func (b *BurnQuote) AmountsIterator() *AmountsIterator {
+// AssetAmountsOutIterator returns an iterator for iterating output asset amounts
+func (b *BurnQuote) AssetAmountsOutIterator() *AssetAmountIterator {
 	var aa []*AssetAmount
 	for _, v := range b.wrappedBurnQuote.AmountsOut {
 		aa = append(aa, unwrapAssetAmount(&v))
 	}
 
-	return &AmountsIterator{
+	return &AssetAmountIterator{
 		curr:   0,
 		values: aa,
 	}
 }
 
-// AmountsOutWithSlippageIterator returns an iterator for iterating out asset amounts after applying the slippage
-func (b *BurnQuote) AmountsOutWithSlippageIterator() (*AmountsIterator, error) {
+// AssetAmountsOutWithSlippageIterator returns an iterator for iterating out asset amounts after applying the slippage
+func (b *BurnQuote) AssetAmountsOutWithSlippageIterator() (*AssetAmountIterator, error) {
 	res, err := b.wrappedBurnQuote.AmountsOutWithSlippage()
 	if err != nil {
 		return nil, err
@@ -64,7 +41,7 @@ func (b *BurnQuote) AmountsOutWithSlippageIterator() (*AmountsIterator, error) {
 		aa = append(aa, unwrapAssetAmount(&v))
 	}
 
-	return &AmountsIterator{
+	return &AssetAmountIterator{
 		curr:   0,
 		values: aa,
 	}, nil
