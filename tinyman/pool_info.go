@@ -1,9 +1,11 @@
 package tinyman
 
 import (
+	"context"
 	"strconv"
 
 	"github.com/synycboom/tinyman-go-sdk/types"
+	"github.com/synycboom/tinyman-go-sdk/v1/pools"
 )
 
 // PoolInfo represents pool information
@@ -14,25 +16,7 @@ type PoolInfo struct {
 // NewPoolInfo creates a pool information
 func NewPoolInfo() *PoolInfo {
 	return &PoolInfo{
-		wrapped: &types.PoolInfo{
-			Address:                         "",
-			Asset1ID:                        0,
-			Asset2ID:                        0,
-			Asset1UnitName:                  "",
-			Asset2UnitName:                  "",
-			LiquidityAssetID:                0,
-			LiquidityAssetName:              "",
-			Asset1Reserves:                  0,
-			Asset2Reserves:                  0,
-			IssuedLiquidity:                 0,
-			UnclaimedProtocolFee:            0,
-			OutstandingAsset1Amount:         0,
-			OutstandingAsset2Amount:         0,
-			OutstandingLiquidityAssetAmount: 0,
-			ValidatorAppID:                  0,
-			AlgoBalance:                     0,
-			Round:                           0,
-		},
+		wrapped: &types.PoolInfo{},
 	}
 }
 
@@ -295,4 +279,28 @@ func (p *PoolInfo) AlgoBalance() string {
 // Round is the latest fetch round
 func (p *PoolInfo) Round() string {
 	return strconv.FormatUint(p.wrapped.Round, 10)
+}
+
+// FetchPoolInfo returns pool information for the given asset1 and asset2
+// validatorAppID, asset1ID, asset2ID are converted to uint64
+func FetchPoolInfo(ac *AlgodClient, validatorAppID, asset1ID, asset2ID string) (*PoolInfo, error) {
+	uintValidatorAppID, err := strconv.ParseUint(validatorAppID, 10, 64)
+	if err != nil {
+		return nil, err
+	}
+	uintAsset1ID, err := strconv.ParseUint(asset1ID, 10, 64)
+	if err != nil {
+		return nil, err
+	}
+	uintAsset2ID, err := strconv.ParseUint(asset2ID, 10, 64)
+	if err != nil {
+		return nil, err
+	}
+
+	info, err := pools.PoolInfo(context.Background(), ac.wrapped, uintValidatorAppID, uintAsset1ID, uintAsset2ID)
+	if err != nil {
+		return nil, err
+	}
+
+	return &PoolInfo{wrapped: info}, nil
 }
