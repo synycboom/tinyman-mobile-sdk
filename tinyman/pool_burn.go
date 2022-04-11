@@ -33,3 +33,17 @@ func (p *Pool) PrepareBurnTransactions(
 
 	return &TransactionGroup{wrapped: txGroup}, nil
 }
+
+// PrepareBurnTransactionsFromQuote prepares burn transaction from a given burn quote and returns a transaction group
+func (p *Pool) PrepareBurnTransactionsFromQuote(quote *BurnQuote, burnerAddress string) (*TransactionGroup, error) {
+	if quote == nil {
+		return nil, fmt.Errorf("quote is required")
+	}
+
+	txGroup, err := p.wrapped.PrepareBurnTransactionsFromQuote(context.Background(), *quote.wrapped, burnerAddress)
+	if err != nil {
+		return nil, err
+	}
+
+	return &TransactionGroup{wrapped: txGroup}, nil
+}
