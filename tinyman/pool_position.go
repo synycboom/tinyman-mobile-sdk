@@ -1,6 +1,7 @@
 package tinyman
 
 import (
+	"context"
 	"fmt"
 	"strconv"
 
@@ -111,4 +112,14 @@ func (a *PoolPosition) LiquidityAssetAmount() *AssetAmount {
 // Share is a share of user which can be calculated as a percentage by (share * 100)
 func (a *PoolPosition) Share(value string) string {
 	return strconv.FormatFloat(a.wrapped.Share, 'f', -1, 64)
+}
+
+// FetchPoolPosition fetches pool position of a user
+func (p *Pool) FetchPoolPosition(userAddress string) (*PoolPosition, error) {
+	position, err := p.wrapped.FetchPoolPosition(context.Background(), userAddress)
+	if err != nil {
+		return nil, err
+	}
+
+	return &PoolPosition{wrapped: position}, nil
 }
