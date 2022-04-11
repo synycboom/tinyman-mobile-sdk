@@ -2,9 +2,10 @@ package tinyman
 
 import (
 	"context"
-
+	"fmt"
 	"github.com/algorand/go-algorand-sdk/client/v2/algod"
 	"github.com/algorand/go-algorand-sdk/client/v2/common"
+	"github.com/algorand/go-algorand-sdk/crypto"
 )
 
 // Header is the Algorand client header
@@ -95,6 +96,32 @@ func (c *AlgodClient) AccountInformation(address string) (*AccountInformation, e
 	}
 
 	return &AccountInformation{wrapped: &a}, nil
+}
+
+// SendRawTransaction sends a transaction to the blockchain
+func (c *AlgodClient) SendRawTransaction(rawTx []byte) error {
+	if _, err := c.wrapped.SendRawTransaction(rawTx).Do(context.Background()); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// SignTransactionWithPrivateKey signs a transaction with a given private key
+func SignTransactionWithPrivateKey(privateKey []byte, tx *Transaction) (*SignedTransaction, error) {
+	if tx == nil {
+		return nil, fmt.Errorf("tx is required")
+	}
+
+	txID, stxBytes, err := crypto.SignTransaction(privateKey, *tx.wrapped)
+	if err != nil {
+		return nil, err
+	}
+
+	return &SignedTransaction{
+		TxID:     txID,
+		StxBytes: stxBytes,
+	}, nil
 }
 
 // IMPROVEMENT: Implement wrapper methods for algod client

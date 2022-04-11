@@ -8,3 +8,12 @@ import "github.com/algorand/go-algorand-sdk/types"
 type SuggestedParams struct {
 	wrapped *types.SuggestedParams
 }
+
+// SignedTransaction represent a signed transaction
+type SignedTransaction struct {
+	// TxID is a transaction id
+	TxID string
+
+	// StxBytes are signed bytes
+	StxBytes []byte
+}

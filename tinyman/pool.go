@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"strconv"
 
+	"github.com/synycboom/tinyman-go-sdk/types"
 	"github.com/synycboom/tinyman-go-sdk/v1/pools"
 )
 
@@ -24,9 +25,21 @@ func NewPool(
 	userAddress string,
 	fetch bool,
 ) (*Pool, error) {
+	if ac == nil {
+		return nil, fmt.Errorf("algodClient is required")
+	}
+	if assetA == nil || assetB == nil {
+		return nil, fmt.Errorf("both assetA and assetB are required")
+	}
+
 	uintValidatorAppID, err := strconv.ParseUint(validatorAppID, 10, 64)
 	if err != nil {
 		return nil, err
+	}
+
+	var poolInfo *types.PoolInfo
+	if info != nil {
+		poolInfo = info.wrapped
 	}
 
 	wrapped, err := pools.NewPool(
@@ -34,7 +47,7 @@ func NewPool(
 		ac.wrapped,
 		assetA.wrapped,
 		assetB.wrapped,
-		info.wrapped,
+		poolInfo,
 		uintValidatorAppID,
 		userAddress,
 		fetch,
@@ -87,6 +100,21 @@ func (p *Pool) MinimumBalance() string {
 // LogicSig returns a logic signature account
 func (p *Pool) LogicSig() (*LogicSigAccount, error) {
 	return poolLogicSigAccount(p.wrapped.ValidatorAppID, p.wrapped.Asset1.ID, p.wrapped.Asset2.ID)
+}
+
+// LiquidityAsset returns a liquidity asset
+func (p *Pool) LiquidityAsset() *Asset {
+	return wrapAsset(p.wrapped.LiquidityAsset)
+}
+
+// Asset1 returns an asset 1
+func (p *Pool) Asset1() *Asset {
+	return wrapAsset(p.wrapped.Asset1)
+}
+
+// Asset2 returns an asset 2
+func (p *Pool) Asset2() *Asset {
+	return wrapAsset(p.wrapped.Asset2)
 }
 
 // Address returns a logic signature address (pool address)

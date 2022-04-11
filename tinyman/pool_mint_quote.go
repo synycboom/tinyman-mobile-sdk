@@ -4,6 +4,8 @@ import (
 	"context"
 	"fmt"
 	"strconv"
+
+	"github.com/synycboom/tinyman-go-sdk/types"
 )
 
 // FetchMintQuote returns a mint quote
@@ -16,8 +18,10 @@ func (p *Pool) FetchMintQuote(
 	if amountA == nil {
 		return nil, fmt.Errorf("amountA is required")
 	}
-	if amountB == nil {
-		return nil, fmt.Errorf("amountB is required")
+
+	var assetAmountB *types.AssetAmount
+	if amountB != nil {
+		assetAmountB = amountB.wrapped
 	}
 
 	floatSlippage, err := strconv.ParseFloat(slippage, 64)
@@ -25,7 +29,7 @@ func (p *Pool) FetchMintQuote(
 		return nil, err
 	}
 
-	quote, err := p.wrapped.FetchMintQuote(context.Background(), amountA.wrapped, amountB.wrapped, floatSlippage)
+	quote, err := p.wrapped.FetchMintQuote(context.Background(), amountA.wrapped, assetAmountB, floatSlippage)
 	if err != nil {
 		return nil, err
 	}

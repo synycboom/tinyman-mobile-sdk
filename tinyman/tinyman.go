@@ -169,3 +169,13 @@ func (c *Client) Balance(asset *Asset, userAddress string) (*AssetAmount, error)
 
 	return &AssetAmount{wrapped: a}, nil
 }
+
+// ValidatorAppID returns a validator app id
+func (c *Client) ValidatorAppID() string {
+	return strconv.FormatUint(c.wrapped.ValidatorAppID, 10)
+}
+
+// UserAddress returns a user address attached to the client
+func (c *Client) UserAddress() string {
+	return c.wrapped.UserAddress
+}

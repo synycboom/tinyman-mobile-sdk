@@ -110,7 +110,7 @@ func (a *PoolPosition) LiquidityAssetAmount() *AssetAmount {
 }
 
 // Share is a share of user which can be calculated as a percentage by (share * 100)
-func (a *PoolPosition) Share(value string) string {
+func (a *PoolPosition) Share() string {
 	return strconv.FormatFloat(a.wrapped.Share, 'f', -1, 64)
 }
 
