@@ -2,6 +2,7 @@ package tinyman
 
 import (
 	"encoding/base64"
+	"fmt"
 
 	"github.com/algorand/go-algorand-sdk/crypto"
 	"github.com/algorand/go-algorand-sdk/mnemonic"
@@ -12,29 +13,28 @@ type Account struct {
 	wrapped *crypto.Account
 }
 
-// NewAccountFromPrivateKey creates an account from a base64 encoded private key
-func NewAccountFromPrivateKey(value string) (*Account, error) {
-	pk, err := base64.StdEncoding.DecodeString(value)
-	if err != nil {
-		return nil, err
+// NewAccount creates an account from a given type either a base64 encoded private key or a mnemonic
+func NewAccount(from string, value string) (*Account, error) {
+	var privateKey []byte
+	if from == AccountFromPrivateKey {
+		pk, err := base64.StdEncoding.DecodeString(value)
+		if err != nil {
+			return nil, err
+		}
+
+		privateKey = pk
+	} else if from == AccountFromMnemonic {
+		pk, err := mnemonic.ToPrivateKey(value)
+		if err != nil {
+			return nil, err
+		}
+
+		privateKey = pk
+	} else {
+		return nil, fmt.Errorf("wrong account creation type %s", from)
 	}
 
-	account, err := crypto.AccountFromPrivateKey(pk)
-	if err != nil {
-		return nil, err
-	}
-
-	return &Account{wrapped: &account}, nil
-}
-
-// NewAccountFromMnemonic creates an account from a mnemonic
-func NewAccountFromMnemonic(value string) (*Account, error) {
-	pk, err := mnemonic.ToPrivateKey(value)
-	if err != nil {
-		return nil, err
-	}
-
-	account, err := crypto.AccountFromPrivateKey(pk)
+	account, err := crypto.AccountFromPrivateKey(privateKey)
 	if err != nil {
 		return nil, err
 	}

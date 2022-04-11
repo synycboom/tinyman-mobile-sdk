@@ -68,7 +68,7 @@ func MakeLogicSigAccountDelegated(program []byte, iter *LogicSigArgsIterator, si
 // The parameter signer is the private key of one of the members of the
 // delegating multisig account. Use the method AppendMultisigSignature on the
 // returned LogicSigAccount to add additional signatures from other members.
-func MakeLogicSigAccountDelegatedMsig(program []byte, iter *LogicSigArgsIterator, msigAccount *MultisigAccount, signer []byte) (*LogicSigAccount, error) {
+func MakeLogicSigAccountDelegatedMsig(program []byte, iter *LogicSigArgsIterator, msigAccount *MultiSigAccount, signer []byte) (*LogicSigAccount, error) {
 	if msigAccount == nil {
 		return nil, fmt.Errorf("msigAccount is required")
 	}

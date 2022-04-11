@@ -37,11 +37,17 @@ const (
 	// AlgoTokenDecimals is the algo token decimals
 	AlgoTokenDecimals = 6
 
-	TotalLiquidityTokens = 0xFFFFFFFFFFFFFFFF
+	TotalLiquidityTokens = "0xFFFFFFFFFFFFFFFF"
 
 	LiquidityTokenDecimals = 6
 
 	LiquidityTokenUnitName = "TM1POOL"
 
 	LiquidityAssetUnitName = "TMPOOL11"
+
+	// AccountFromMnemonic used when creating a new account object by mnemonic
+	AccountFromMnemonic = "acc_from_mnemonic"
+
+	// AccountFromPrivateKey used when creating a new account object by private key
+	AccountFromPrivateKey = "acc_from_private_key"
 )
