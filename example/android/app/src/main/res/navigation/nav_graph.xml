@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/ExampleFragment">
+
+    <fragment
+        android:id="@+id/ExampleFragment"
+        android:name="com.example.tinyman.ExampleFragment"
+        tools:layout="@layout/fragment_examples">
+
+        <action
+            android:id="@+id/action_ExampleFragment_to_CreateAnAssetFragment"
+            app:destination="@id/CreateAnAssetFragment" />
+
+        <action
+            android:id="@+id/action_ExampleFragment_to_BootstrapFragment"
+            app:destination="@id/BootstrapFragment" />
+
+        <action
+            android:id="@+id/action_ExampleFragment_to_MintFragment"
+            app:destination="@id/MintFragment" />
+
+        <action
+            android:id="@+id/action_ExampleFragment_to_BurnFragment"
+            app:destination="@id/BurnFragment" />
+
+        <action
+            android:id="@+id/action_ExampleFragment_to_SwapFragment"
+            app:destination="@id/SwapFragment" />
+
+        <action
+            android:id="@+id/action_ExampleFragment_to_RedeemFragment"
+            app:destination="@id/RedeemFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/CreateAnAssetFragment"
+        android:name="com.example.tinyman.CreateAnAssetFragment"
+        tools:layout="@layout/fragment_create_an_asset">
+
+        <action
+            android:id="@+id/action_CreateAnAssetFragment_to_ExampleFragment"
+            app:destination="@id/ExampleFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/BootstrapFragment"
+        android:name="com.example.tinyman.BootstrapFragment"
+        tools:layout="@layout/fragment_bootstrap">
+
+        <action
+            android:id="@+id/action_BootstrapFragment_to_ExampleFragment"
+            app:destination="@id/ExampleFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/MintFragment"
+        android:name="com.example.tinyman.MintFragment"
+        tools:layout="@layout/fragment_mint">
+
+        <action
+            android:id="@+id/action_MintFragment_to_ExampleFragment"
+            app:destination="@id/ExampleFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/BurnFragment"
+        android:name="com.example.tinyman.BurnFragment"
+        tools:layout="@layout/fragment_burn">
+
+        <action
+            android:id="@+id/action_BurnFragment_to_ExampleFragment"
+            app:destination="@id/ExampleFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/SwapFragment"
+        android:name="com.example.tinyman.SwapFragment"
+        tools:layout="@layout/fragment_swap">
+
+        <action
+            android:id="@+id/action_SwapFragment_to_ExampleFragment"
+            app:destination="@id/ExampleFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/RedeemFragment"
+        android:name="com.example.tinyman.RedeemFragment"
+        tools:layout="@layout/fragment_redeem">
+
+        <action
+            android:id="@+id/action_RedeemFragment_to_ExampleFragment"
+            app:destination="@id/ExampleFragment" />
+    </fragment>
+</navigation>
