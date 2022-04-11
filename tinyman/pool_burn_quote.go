@@ -6,7 +6,7 @@ import (
 )
 
 // FetchBurnQuote returns a burn quote
-// slippage must be a string-formatted float64
+// slippage is converted to float64
 func (p *Pool) FetchBurnQuote(liquidityAsset *AssetAmount, slippage string) (*BurnQuote, error) {
 	floatSlippage, err := strconv.ParseFloat(slippage, 64)
 	if err != nil {
