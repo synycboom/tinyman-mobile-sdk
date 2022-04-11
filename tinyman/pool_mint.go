@@ -33,3 +33,17 @@ func (p *Pool) PrepareMintTransactions(
 
 	return &TransactionGroup{wrapped: txGroup}, nil
 }
+
+// PrepareMintTransactionsFromQuote prepares mint transaction from a given mint quote and returns a transaction group
+func (p *Pool) PrepareMintTransactionsFromQuote(quote *MintQuote, minterAddress string) (*TransactionGroup, error) {
+	if quote == nil {
+		return nil, fmt.Errorf("quote is required")
+	}
+
+	txGroup, err := p.wrapped.PrepareMintTransactionsFromQuote(context.Background(), quote.wrapped, minterAddress)
+	if err != nil {
+		return nil, err
+	}
+
+	return &TransactionGroup{wrapped: txGroup}, nil
+}
