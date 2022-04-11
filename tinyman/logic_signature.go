@@ -71,6 +71,7 @@ func (lsig *LogicSig) Msig() *MultisigSig {
 func (lsig *LogicSig) Args() *LogicSigArgsIterator {
 	var values [][]byte
 	for _, value := range lsig.wrapped.Args {
+		value := value
 		values = append(values, value)
 	}
 

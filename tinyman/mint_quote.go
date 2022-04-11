@@ -15,6 +15,7 @@ type MintQuote struct {
 func (m *MintQuote) AssetAmountsInIterator() *AssetAmountIterator {
 	var aa []*AssetAmount
 	for _, v := range m.wrapped.AmountsIn {
+		v := v
 		aa = append(aa, wrapAssetAmount(&v))
 	}
 

@@ -89,6 +89,7 @@ func (msig *MultisigSig) Threshold() int {
 func (msig *MultisigSig) Subsigs() *MultisigSubsigIterator {
 	var ss []*MultisigSubsig
 	for _, s := range msig.wrapped.Subsigs {
+		s := s
 		ss = append(ss, wrapMultisigSubsig(&s))
 	}
 

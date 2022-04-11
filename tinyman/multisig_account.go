@@ -157,6 +157,7 @@ func (ma *MultiSigAccount) Threshold() int {
 func (ma *MultiSigAccount) Pks() *PublicKeyIterator {
 	var values [][]byte
 	for _, pk := range ma.wrapped.Pks {
+		pk := pk
 		values = append(values, pk)
 	}
 

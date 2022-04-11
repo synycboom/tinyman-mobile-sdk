@@ -31,6 +31,7 @@ func (s *Signature) Set(value []byte) error {
 func (s *Signature) Get() []byte {
 	var out []byte
 	for _, b := range s.wrapped {
+		b := b
 		out = append(out, b)
 	}
 

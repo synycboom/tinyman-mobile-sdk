@@ -105,6 +105,7 @@ func LogicSigAccountFromLogicSig(lsig *LogicSig, signerPublicKey []byte) (*Logic
 
 	var pk ed25519.PublicKey
 	for _, value := range signerPublicKey {
+		pk := pk
 		pk = append(pk, value)
 	}
 

@@ -134,6 +134,7 @@ func (c *Client) FetchExcessAmount(userAddr string) (*RedeemQuoteIterator, error
 
 	iter := RedeemQuoteIterator{}
 	for _, quote := range quotes {
+		quote := quote
 		iter.values = append(iter.values, &RedeemQuote{wrapped: &quote})
 	}
 

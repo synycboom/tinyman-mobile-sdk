@@ -56,6 +56,7 @@ func (p *Pool) FilterRedeemQuotes(iter *RedeemQuoteIterator) (*RedeemQuoteIterat
 
 	var wrappedQuotes []*RedeemQuote
 	for _, quote := range quotes {
+		quote := quote
 		wrappedQuotes = append(wrappedQuotes, &RedeemQuote{wrapped: &quote})
 	}
 
