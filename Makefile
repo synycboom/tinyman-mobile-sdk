@@ -5,7 +5,7 @@ GO_MOBILE := golang.org/x/mobile/cmd/gomobile
 IOS_BUILD_PATH := $(SRC_PATH)/build/ios
 IOS_BUILD_FILE := $(IOS_BUILD_PATH)/Tinyman.xcframework
 
-ANDROID_BUILD_PATH := $(SRC_PATH)/build/android
+ANDROID_BUILD_PATH := $(SRC_PATH)/example/android/app/libs
 ANDROID_BUILD_AAR := $(ANDROID_BUILD_PATH)/tinyman.aar
 
 ANDROID_BUILD_TOOLS := $(SRC_PATH)/android-build-tools
