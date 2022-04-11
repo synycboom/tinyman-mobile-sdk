@@ -13,7 +13,7 @@ func (p *Pool) FetchBurnQuote(liquidityAsset *AssetAmount, slippage string) (*Bu
 		return nil, err
 	}
 
-	quote, err := p.wrapped.FetchBurnQuote(context.Background(), *liquidityAsset.wrapped, floatSlippage)
+	quote, err := p.wrapped.FetchBurnQuote(context.Background(), liquidityAsset.wrapped, floatSlippage)
 	if err != nil {
 		return nil, err
 	}

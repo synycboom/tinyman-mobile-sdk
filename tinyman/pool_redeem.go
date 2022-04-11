@@ -14,7 +14,7 @@ func (p *Pool) PrepareRedeemTransactions(amountOut *AssetAmount, redeemerAddress
 		return nil, fmt.Errorf("amountOut is required")
 	}
 
-	txGroup, err := p.wrapped.PrepareRedeemTransactions(context.Background(), *amountOut.wrapped, redeemerAddress)
+	txGroup, err := p.wrapped.PrepareRedeemTransactions(context.Background(), amountOut.wrapped, redeemerAddress)
 	if err != nil {
 		return nil, err
 	}
@@ -28,7 +28,7 @@ func (p *Pool) PrepareRedeemTransactionsFromQuote(quote *RedeemQuote, redeemerAd
 		return nil, fmt.Errorf("quote is required")
 	}
 
-	txGroup, err := p.wrapped.PrepareRedeemTransactionsFromQuote(context.Background(), *quote.wrapped, redeemerAddress)
+	txGroup, err := p.wrapped.PrepareRedeemTransactionsFromQuote(context.Background(), quote.wrapped, redeemerAddress)
 	if err != nil {
 		return nil, err
 	}

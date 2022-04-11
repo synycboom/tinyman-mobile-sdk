@@ -26,7 +26,7 @@ func (p *Pool) PrepareMintTransactions(
 		amountsIn[item.wrapped.Asset.ID] = *item.wrapped
 	}
 
-	txGroup, err := p.wrapped.PrepareMintTransactions(context.Background(), amountsIn, *liquidityAssetAmount.wrapped, minterAddress)
+	txGroup, err := p.wrapped.PrepareMintTransactions(context.Background(), amountsIn, liquidityAssetAmount.wrapped, minterAddress)
 	if err != nil {
 		return nil, err
 	}

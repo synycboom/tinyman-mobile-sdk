@@ -18,7 +18,7 @@ func (p *Pool) FetchFixedOutputSwapQuote(amountOut *AssetAmount, slippage string
 		return nil, err
 	}
 
-	quote, err := p.wrapped.FetchFixedOutputSwapQuote(context.Background(), *amountOut.wrapped, floatSlippage)
+	quote, err := p.wrapped.FetchFixedOutputSwapQuote(context.Background(), amountOut.wrapped, floatSlippage)
 	if err != nil {
 		return nil, err
 	}

@@ -26,7 +26,7 @@ func (p *Pool) PrepareBurnTransactions(
 		assetsOut[item.wrapped.Asset.ID] = *item.wrapped
 	}
 
-	txGroup, err := p.wrapped.PrepareBurnTransactions(context.Background(), assetsOut, *liquidityAssetAmount.wrapped, burnerAddress)
+	txGroup, err := p.wrapped.PrepareBurnTransactions(context.Background(), assetsOut, liquidityAssetAmount.wrapped, burnerAddress)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ func (p *Pool) PrepareBurnTransactionsFromQuote(quote *BurnQuote, burnerAddress 
 		return nil, fmt.Errorf("quote is required")
 	}
 
-	txGroup, err := p.wrapped.PrepareBurnTransactionsFromQuote(context.Background(), *quote.wrapped, burnerAddress)
+	txGroup, err := p.wrapped.PrepareBurnTransactionsFromQuote(context.Background(), quote.wrapped, burnerAddress)
 	if err != nil {
 		return nil, err
 	}

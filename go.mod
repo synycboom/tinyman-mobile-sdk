@@ -2,7 +2,7 @@ module github.com/synycboom/tinyman-mobile-sdk
 
 go 1.18
 
-require github.com/synycboom/tinyman-go-sdk v0.1.0
+require github.com/synycboom/tinyman-go-sdk v0.1.1
 
 require (
 	github.com/algorand/go-algorand-sdk v1.14.1 // indirect

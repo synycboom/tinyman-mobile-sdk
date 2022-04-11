@@ -89,6 +89,8 @@ github.com/stretchr/testify v1.7.1 h1:5TQK59W5E3v0r2duFAb7P95B6hEeOyEnHRa8MjYSMT
 github.com/stretchr/testify v1.7.1/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
 github.com/synycboom/tinyman-go-sdk v0.1.0 h1:2iOSo9mDl94PlcOQH1FcHGLJLXMqyb6phNMmUKNaEyo=
 github.com/synycboom/tinyman-go-sdk v0.1.0/go.mod h1:rqfKmusJBdNHwVhkZDPkMyprS343pOMXkAf+PqRvMYw=
+github.com/synycboom/tinyman-go-sdk v0.1.1 h1:U7Ul76ElgnpqMRXT02I9wVA5Em9WiLYfl+QXws4Tbqo=
+github.com/synycboom/tinyman-go-sdk v0.1.1/go.mod h1:rqfKmusJBdNHwVhkZDPkMyprS343pOMXkAf+PqRvMYw=
 github.com/ttacon/chalk v0.0.0-20160626202418-22c06c80ed31/go.mod h1:onvgF043R+lC5RZ8IT9rBXDaEDnpnw/Cl+HFiw+v/7Q=
 github.com/valyala/bytebufferpool v1.0.0/go.mod h1:6bBcMArwyJ5K/AmCkWv1jt77kVWyCJ6HpOuEn7z0Csc=
 github.com/valyala/fasttemplate v1.0.1/go.mod h1:UQGH1tvbgY+Nz5t2n7tXsz52dQxojPUpymEIMZ47gx8=
