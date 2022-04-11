@@ -35,8 +35,46 @@ func (iter *TransactionIterator) Next() *Transaction {
 	return nil
 }
 
+// Add adds an item to the iterator
+func (iter *TransactionIterator) Add(item *Transaction) {
+	iter.values = append(iter.values, item)
+}
+
 // Reset resets the iterator
 func (iter *TransactionIterator) Reset() {
+	iter.curr = 0
+}
+
+// SignedTransactionIterator is a signed transaction iterator
+type SignedTransactionIterator struct {
+	curr   int
+	values [][]byte
+}
+
+// HasNext return true if there are items to be iterated
+func (iter *SignedTransactionIterator) HasNext() bool {
+	return iter.curr < len(iter.values)
+}
+
+// Next returns the next item
+func (iter *SignedTransactionIterator) Next() []byte {
+	if iter.HasNext() {
+		idx := iter.curr
+		iter.curr += 1
+
+		return iter.values[idx]
+	}
+
+	return nil
+}
+
+// Add adds an item to the iterator
+func (iter *SignedTransactionIterator) Add(item []byte) {
+	iter.values = append(iter.values, item)
+}
+
+// Reset resets the iterator
+func (iter *SignedTransactionIterator) Reset() {
 	iter.curr = 0
 }
 
@@ -65,7 +103,29 @@ func (tg *TransactionGroup) Submit(client *AlgodClient, wait bool) (string, erro
 	return tg.wrapped.Submit(context.Background(), client.wrapped, wait)
 }
 
-// IMPROVEMENT: Add transaction iterator
-// // TransactionIterator returns a transaciton iterator
-// func (tg *TransactionGroup) TransactionIterator() *TransactionIterator {
-// }
+// TransactionIterator returns a transaction iterator
+func (tg *TransactionGroup) TransactionIterator() *TransactionIterator {
+	var txs []*Transaction
+	for _, tx := range tg.wrapped.Transactions() {
+		tx := tx
+		txs = append(txs, &Transaction{wrapped: &tx})
+	}
+
+	return &TransactionIterator{values: txs}
+}
+
+// SignedTransactionsIterator returns a signed transaction iterator
+func (tg *TransactionGroup) SignedTransactionsIterator() *SignedTransactionIterator {
+	var stxs [][]byte
+	for _, stx := range tg.wrapped.SignedTransactions() {
+		stx := stx
+		stxs = append(stxs, stx)
+	}
+
+	return &SignedTransactionIterator{values: stxs}
+}
+
+// SetSignedTransactions sets a signed transaction at a given index
+func (tg *TransactionGroup) SetSignedTransactions(index int, signedTx []byte) error {
+	return tg.wrapped.SetSignedTransactions(index, signedTx)
+}
