@@ -77,6 +77,7 @@ func MakeAlgodClientWithHeaders(address string, apiToken string, headerIter *Hea
 	return &AlgodClient{wrapped: c}, nil
 }
 
+// SuggestedParams returns suggested params
 func (c *AlgodClient) SuggestedParams() (*SuggestedParams, error) {
 	sp, err := c.wrapped.SuggestedParams().Do(context.Background())
 	if err != nil {
@@ -84,6 +85,16 @@ func (c *AlgodClient) SuggestedParams() (*SuggestedParams, error) {
 	}
 
 	return &SuggestedParams{wrapped: &sp}, nil
+}
+
+// AccountInformation fetches account information
+func (c *AlgodClient) AccountInformation(address string) (*AccountInformation, error) {
+	a, err := c.wrapped.AccountInformation(address).Do(context.Background())
+	if err != nil {
+		return nil, err
+	}
+
+	return &AccountInformation{wrapped: &a}, nil
 }
 
 // IMPROVEMENT: Implement wrapper methods for algod client
