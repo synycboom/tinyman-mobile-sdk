@@ -24,8 +24,9 @@ See [example](https://github.com/synycboom/tinyman-mobile-sdk//tree/master/examp
 ## Usage Limitation
 Since this SDK is compiled from Go to mobile native libs, there are some limitations that this SDK cannot do.
 - go-mobile has type restriction, so other unsupported types (from exported functions/parameters/returned values) are not able to be bundled to the libs.
-- we have to create wrappers for the [algorand-go-sdk](https://github.com/algorand/go-algorand-sdk) such as the client, and other structs/functions, but it is not fully ported yet. because it requires a lot of effort to do.
+- we have to create wrappers for the [algorand-go-sdk](https://github.com/algorand/go-algorand-sdk) such as the client, and other structs/functions and use them with this SDK, but it is not fully ported yet. because it requires a lot of effort to do.
 - features that require algorand-go-sdk structs/functions like signing with kmd client [kmd-client](https://github.com/algorand/go-algorand-sdk#kmd-client) is not available right now.
+- Some types that being used in [tinyman-go-sdk](https://github.com/synycboom/tinyman-go-sdk) like 64-bit unsigned integer, 64-bit floating point are not supported. We will use a string to represent the value instead and convert inside the SDK.
 
 ## Basic Usage
 Normally, the steps for calling the SDK are separated into 3 parts.
