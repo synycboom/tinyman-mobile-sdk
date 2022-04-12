@@ -2,7 +2,7 @@
 
 if [ "$1" = "" ] || [ "$2" = "" ] || [ "$3" = "" ] || [ "$4" = "" ] || [ "$5" = "" ]
 then
-  echo "Usage: $0 <version <android_home> <android_ndk_home> <go_mobile> <module>"
+  echo "Usage: $0 <version> <android_home> <android_ndk_home> <go_mobile> <module>"
   exit
 fi
 
