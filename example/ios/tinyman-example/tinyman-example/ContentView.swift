@@ -15,11 +15,11 @@ func createClients(userAddress: String) throws -> (TinymanAlgodClient, TinymanCl
     var error: NSError?
     let algodClient = TinymanMakeAlgodClient(TinymanAlgodTestnetHost, "", &error)
     if (error != nil) {
-        throw error!;
+        throw error!
     }
     let tinyManClient = TinymanNewTestNetClient(algodClient, userAddress, &error)
     if (error != nil) {
-        throw error!;
+        throw error!
     }
     
     return (algodClient!, tinyManClient!);
@@ -52,7 +52,7 @@ func optInAppIfNeeded(tinymanClient: TinymanClient, account: TinymanAccount) thr
     var error: NSError?
     let txId = tinymanClient.submit(txGroup, wait: true, error: &error)
     if (error != nil) {
-        throw error!;
+        throw error!
     }
     
     print("Submitted opt-in tx: \(txId)")
@@ -77,7 +77,7 @@ func optInAssetIfNeeded(tinymanClient: TinymanClient, account: TinymanAccount, a
     var error: NSError?
     let txId = tinymanClient.submit(txGroup, wait: true, error: &error)
     if (error != nil) {
-        throw error!;
+        throw error!
     }
 
     print("Opted in for asset \(assetId) with txid \(txId)")
@@ -98,7 +98,7 @@ func createTestAsset(account: TinymanAccount, ac: TinymanAlgodClient) throws -> 
         &error
     )
     if (error != nil) {
-        throw error!;
+        throw error!
     }
     
     return assetId
@@ -272,7 +272,7 @@ struct BootstrapLiquidityView: View {
                     &error
                 )!
                 if (error != nil) {
-                    throw error!;
+                    throw error!
                 }
 
                 // Prepare a transaction group for bootstrapping
@@ -285,7 +285,7 @@ struct BootstrapLiquidityView: View {
                 // Submit a group of transaction to the blockchain
                 let txId = tinymanClient.submit(txGroup, wait: true, error: &error)
                 if (error != nil) {
-                    throw error!;
+                    throw error!
                 }
             
                 output = "Liquidity pool was bootstrapped with txid \(txId)"
@@ -365,7 +365,7 @@ struct AddLiquidityView: View {
                     &error
                 )!
                 if (error != nil) {
-                    throw error!;
+                    throw error!
                 }
                 
                 // Check whether the user already opted in for the liquidity asset or not, if not let the user opt in
@@ -406,7 +406,7 @@ struct AddLiquidityView: View {
                 // Submit a group of transaction to the blockchain
                 let txId = tinymanClient.submit(txGroup, wait: true, error: &error)
                 if (error != nil) {
-                    throw error!;
+                    throw error!
                 }
                 
                 output += "Liquidity was added in txid \(txId)\n"
@@ -494,7 +494,7 @@ struct RemoveLiquidityView: View {
                     &error
                 )!
                 if (error != nil) {
-                    throw error!;
+                    throw error!
                 }
                 
                 // Check whether the user already opted in for the liquidity asset or not, if not let the user opt in
@@ -531,7 +531,7 @@ struct RemoveLiquidityView: View {
                 // Submit a group of transaction to the blockchain
                 let txId = tinymanClient.submit(txGroup, wait: true, error: &error)
                 if (error != nil) {
-                    throw error!;
+                    throw error!
                 }
 
                 output += "Liquidity was removed in txid \(txId)\n"
@@ -618,7 +618,7 @@ struct SwapView: View {
                     &error
                 )!
                 if (error != nil) {
-                    throw error!;
+                    throw error!
                 }
                 
                 // Check whether the user already opted in for the liquidity asset or not, if not let the user opt in
@@ -638,7 +638,7 @@ struct SwapView: View {
                 // Calculate price after applying the slippage
                 let priceWithSlippage = quote.getPriceWithSlippage(&error)
                 if (error != nil) {
-                    throw error!;
+                    throw error!
                 }
 
                 // Calculate output amount after applying the slippage
@@ -658,7 +658,7 @@ struct SwapView: View {
                 // Submit a group of transaction to the blockchain
                 let txId = tinymanClient.submit(txGroup, wait: true, error: &error)
                 if (error != nil) {
-                    throw error!;
+                    throw error!
                 }
 
                 output += "Swapped with txid \(txId)"
@@ -737,7 +737,7 @@ struct RedeemView: View {
                     &error
                 )!
                 if (error != nil) {
-                    throw error!;
+                    throw error!
                 }
                 
                 // Check whether the user already opted in for the liquidity asset or not, if not let the user opt in
@@ -768,7 +768,7 @@ struct RedeemView: View {
                 // Submit a group of transaction to the blockchain
                 let txId = tinymanClient.submit(txGroup, wait: true, error: &error)
                 if (error != nil) {
-                    throw error!;
+                    throw error!
                 }
 
                 output += "Swapped with txid \(txId)"
