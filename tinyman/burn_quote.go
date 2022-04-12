@@ -11,8 +11,8 @@ type BurnQuote struct {
 	wrapped *types.BurnQuote
 }
 
-// AssetAmountsOutIterator returns an iterator for iterating output asset amounts
-func (b *BurnQuote) AssetAmountsOutIterator() *AssetAmountIterator {
+// GetAssetAmountsOutIterator returns an iterator for iterating output asset amounts
+func (b *BurnQuote) GetAssetAmountsOutIterator() *AssetAmountIterator {
 	var aa []*AssetAmount
 	for _, v := range b.wrapped.AmountsOut {
 		v := v
@@ -25,8 +25,8 @@ func (b *BurnQuote) AssetAmountsOutIterator() *AssetAmountIterator {
 	}
 }
 
-// AssetAmountsOutWithSlippageIterator returns an iterator for iterating out asset amounts after applying the slippage
-func (b *BurnQuote) AssetAmountsOutWithSlippageIterator() (*AssetAmountIterator, error) {
+// GetAssetAmountsOutWithSlippageIterator returns an iterator for iterating out asset amounts after applying the slippage
+func (b *BurnQuote) GetAssetAmountsOutWithSlippageIterator() (*AssetAmountIterator, error) {
 	res, err := b.wrapped.AmountsOutWithSlippage()
 	if err != nil {
 		return nil, err
@@ -44,12 +44,12 @@ func (b *BurnQuote) AssetAmountsOutWithSlippageIterator() (*AssetAmountIterator,
 	}, nil
 }
 
-// LiquidityAssetAmount returns a liquidity asset amount
-func (b *BurnQuote) LiquidityAssetAmount() *AssetAmount {
+// GetLiquidityAssetAmount returns a liquidity asset amount
+func (b *BurnQuote) GetLiquidityAssetAmount() *AssetAmount {
 	return wrapAssetAmount(&b.wrapped.LiquidityAssetAmount)
 }
 
-// Slippage returns a slippage
-func (b *BurnQuote) Slippage() string {
+// GetSlippage returns a slippage
+func (b *BurnQuote) GetSlippage() string {
 	return strconv.FormatFloat(b.wrapped.Slippage, 'f', -1, 64)
 }

@@ -54,39 +54,39 @@ func (m *MultisigSubsig) SetSignature(sig *Signature) {
 	m.wrapped.Sig = *sig.wrapped
 }
 
-// Key returns a key
-func (m *MultisigSubsig) Key() []byte {
+// GetKey returns a key
+func (m *MultisigSubsig) GetKey() []byte {
 	return m.wrapped.Key
 }
 
-// Signature returns a signature
-func (m *MultisigSubsig) Signature() *Signature {
+// GetSignature returns a signature
+func (m *MultisigSubsig) GetSignature() *Signature {
 	return wrapSig(&m.wrapped.Sig)
 }
 
-// MultisigSig holds multiple Subsigs, as well as threshold and version info
+// MultisigSig holds multiple GetSubsigs, as well as threshold and version info
 type MultisigSig struct {
 	wrapped *algoTypes.MultisigSig
 }
 
-// Blank returns true iff the msig is empty. We need this instead of just
-// comparing with == MultisigSig{}, because Subsigs is a slice.
-func (msig *MultisigSig) Blank() bool {
+// IsBlank returns true iff the msig is empty. We need this instead of just
+// comparing with == MultisigSig{}, because GetSubsigs is a slice.
+func (msig *MultisigSig) IsBlank() bool {
 	return msig.wrapped.Blank()
 }
 
-// Version returns the version which is converted from uint8
-func (msig *MultisigSig) Version() int {
+// GetVersion returns the version which is converted from uint8
+func (msig *MultisigSig) GetVersion() int {
 	return int(msig.wrapped.Version)
 }
 
-// Threshold returns the threshold which is converted from uint8
-func (msig *MultisigSig) Threshold() int {
+// GetThreshold returns the threshold which is converted from uint8
+func (msig *MultisigSig) GetThreshold() int {
 	return int(msig.wrapped.Threshold)
 }
 
-// Subsigs returns a new MultisigSubsig iterator
-func (msig *MultisigSig) Subsigs() *MultisigSubsigIterator {
+// GetSubsigs returns a new MultisigSubsig iterator
+func (msig *MultisigSig) GetSubsigs() *MultisigSubsigIterator {
 	var ss []*MultisigSubsig
 	for _, s := range msig.wrapped.Subsigs {
 		s := s
@@ -109,7 +109,7 @@ func (msig *MultisigSig) SetThreshold(value int) {
 	msig.wrapped.Threshold = uint8(value)
 }
 
-// SetSubsigs sets Subsigs from MultisigSubsigIterator
+// SetSubsigs sets GetSubsigs from MultisigSubsigIterator
 func (msig *MultisigSig) SetSubsigs(iter *MultisigSubsigIterator) error {
 	if iter == nil {
 		return fmt.Errorf("iter is required")

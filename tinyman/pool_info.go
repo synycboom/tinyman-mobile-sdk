@@ -196,88 +196,88 @@ func (p *PoolInfo) SetRound(value string) error {
 	return nil
 }
 
-// Address is a pool address
-func (p *PoolInfo) Address() string {
+// GetAddress is a pool address
+func (p *PoolInfo) GetAddress() string {
 	return p.wrapped.Address
 }
 
-// Asset1ID is an asset1 id
-func (p *PoolInfo) Asset1ID() string {
+// GetAsset1ID is an asset1 id
+func (p *PoolInfo) GetAsset1ID() string {
 	return strconv.FormatUint(p.wrapped.Asset1ID, 10)
 }
 
-// Asset2ID is an asset2 id
-func (p *PoolInfo) Asset2ID() string {
+// GetAsset2ID is an asset2 id
+func (p *PoolInfo) GetAsset2ID() string {
 	return strconv.FormatUint(p.wrapped.Asset2ID, 10)
 }
 
-// Asset1UnitName is an asset1 unit name
-func (p *PoolInfo) Asset1UnitName() string {
+// GetAsset1UnitName is an asset1 unit name
+func (p *PoolInfo) GetAsset1UnitName() string {
 	return p.wrapped.Asset1UnitName
 }
 
-// Asset2UnitName is an asset2 unit name
-func (p *PoolInfo) Asset2UnitName() string {
+// GetAsset2UnitName is an asset2 unit name
+func (p *PoolInfo) GetAsset2UnitName() string {
 	return p.wrapped.Asset2UnitName
 }
 
-// LiquidityAssetID is an asset id for the liquidity
-func (p *PoolInfo) LiquidityAssetID() string {
+// GetLiquidityAssetID is an asset id for the liquidity
+func (p *PoolInfo) GetLiquidityAssetID() string {
 	return strconv.FormatUint(p.wrapped.LiquidityAssetID, 10)
 }
 
-// LiquidityAssetName is an asset name for the liquidity
-func (p *PoolInfo) LiquidityAssetName() string {
+// GetLiquidityAssetName is an asset name for the liquidity
+func (p *PoolInfo) GetLiquidityAssetName() string {
 	return p.wrapped.LiquidityAssetName
 }
 
-// Asset1Reserves is an asset1's reserves value
-func (p *PoolInfo) Asset1Reserves() string {
+// GetAsset1Reserves is an asset1's reserves value
+func (p *PoolInfo) GetAsset1Reserves() string {
 	return strconv.FormatUint(p.wrapped.Asset1Reserves, 10)
 }
 
-// Asset2Reserves is an asset2's reserves value
-func (p *PoolInfo) Asset2Reserves() string {
+// GetAsset2Reserves is an asset2's reserves value
+func (p *PoolInfo) GetAsset2Reserves() string {
 	return strconv.FormatUint(p.wrapped.Asset2Reserves, 10)
 }
 
-// IssuedLiquidity is the total issued liquidity
-func (p *PoolInfo) IssuedLiquidity() string {
+// GetIssuedLiquidity is the total issued liquidity
+func (p *PoolInfo) GetIssuedLiquidity() string {
 	return strconv.FormatUint(p.wrapped.IssuedLiquidity, 10)
 }
 
-// UnclaimedProtocolFee is an unclaimed protocol fee
-func (p *PoolInfo) UnclaimedProtocolFee() string {
+// GetUnclaimedProtocolFee is an unclaimed protocol fee
+func (p *PoolInfo) GetUnclaimedProtocolFee() string {
 	return strconv.FormatUint(p.wrapped.UnclaimedProtocolFee, 10)
 }
 
-// OutstandingAsset1Amount is an outstanding asset1 amount
-func (p *PoolInfo) OutstandingAsset1Amount() string {
+// GetOutstandingAsset1Amount is an outstanding asset1 amount
+func (p *PoolInfo) GetOutstandingAsset1Amount() string {
 	return strconv.FormatUint(p.wrapped.OutstandingAsset1Amount, 10)
 }
 
-// OutstandingAsset2Amount is an outstanding asset2 amount
-func (p *PoolInfo) OutstandingAsset2Amount() string {
+// GetOutstandingAsset2Amount is an outstanding asset2 amount
+func (p *PoolInfo) GetOutstandingAsset2Amount() string {
 	return strconv.FormatUint(p.wrapped.OutstandingAsset2Amount, 10)
 }
 
-// OutstandingLiquidityAssetAmount is an outstanding liquidity asset amount
-func (p *PoolInfo) OutstandingLiquidityAssetAmount() string {
+// GetOutstandingLiquidityAssetAmount is an outstanding liquidity asset amount
+func (p *PoolInfo) GetOutstandingLiquidityAssetAmount() string {
 	return strconv.FormatUint(p.wrapped.OutstandingLiquidityAssetAmount, 10)
 }
 
-// ValidatorAppID is the validator app id
-func (p *PoolInfo) ValidatorAppID() string {
+// GetValidatorAppID is the validator app id
+func (p *PoolInfo) GetValidatorAppID() string {
 	return strconv.FormatUint(p.wrapped.ValidatorAppID, 10)
 }
 
-// AlgoBalance is a balance of the pool
-func (p *PoolInfo) AlgoBalance() string {
+// GetAlgoBalance is a balance of the pool
+func (p *PoolInfo) GetAlgoBalance() string {
 	return strconv.FormatUint(p.wrapped.AlgoBalance, 10)
 }
 
-// Round is the latest fetch round
-func (p *PoolInfo) Round() string {
+// GetRound is the latest fetch round
+func (p *PoolInfo) GetRound() string {
 	return strconv.FormatUint(p.wrapped.Round, 10)
 }
 

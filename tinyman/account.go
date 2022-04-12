@@ -42,23 +42,23 @@ func NewAccount(from string, value string) (*Account, error) {
 	return &Account{wrapped: &account}, nil
 }
 
-// Address returns an address
-func (a *Account) Address() string {
+// GetAddress returns an address
+func (a *Account) GetAddress() string {
 	return a.wrapped.Address.String()
 }
 
-// PrivateKey returns a private key
-func (a *Account) PrivateKey() []byte {
+// GetPrivateKey returns a private key
+func (a *Account) GetPrivateKey() []byte {
 	return a.wrapped.PrivateKey
 }
 
-// PublicKey returns a public key
-func (a *Account) PublicKey() []byte {
+// GetPublicKey returns a public key
+func (a *Account) GetPublicKey() []byte {
 	return a.wrapped.PublicKey
 }
 
 func unwrapAccount(acc *Account) (*crypto.Account, error) {
-	unwrapped, err := crypto.AccountFromPrivateKey(acc.PrivateKey())
+	unwrapped, err := crypto.AccountFromPrivateKey(acc.GetPrivateKey())
 	if err != nil {
 		return nil, err
 	}

@@ -40,12 +40,12 @@ type RedeemQuote struct {
 	wrapped *types.RedeemQuote
 }
 
-// AssetAmount returns an asset amount
-func (r *RedeemQuote) AssetAmount() *AssetAmount {
+// GetAssetAmount returns an asset amount
+func (r *RedeemQuote) GetAssetAmount() *AssetAmount {
 	return wrapAssetAmount(&r.wrapped.Amount)
 }
 
-// AssetAmount returns an asset amount
-func (r *RedeemQuote) PoolAddress() string {
+// GetPoolAddress returns an address of the pool
+func (r *RedeemQuote) GetPoolAddress() string {
 	return r.wrapped.PoolAddress
 }

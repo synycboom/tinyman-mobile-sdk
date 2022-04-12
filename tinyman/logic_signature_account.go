@@ -126,14 +126,14 @@ func (lsa *LogicSigAccount) IsDelegated() bool {
 	return lsa.wrapped.IsDelegated()
 }
 
-// Address returns the address of this LogicSigAccount.
+// GetAddress returns the address of this LogicSigAccount.
 //
 // If the LogicSig is delegated to another account, this will return the address
 // of that account.
 //
 // If the LogicSig is not delegated to another account, this will return an
 // escrow address that is the hash of the LogicSig's program code.
-func (lsa *LogicSigAccount) Address() (string, error) {
+func (lsa *LogicSigAccount) GetAddress() (string, error) {
 	addr, err := lsa.wrapped.Address()
 	if err != nil {
 		return "", err
@@ -142,13 +142,13 @@ func (lsa *LogicSigAccount) Address() (string, error) {
 	return addr.String(), nil
 }
 
-// Lsig returns the underlying LogicSig object
-func (lsa *LogicSigAccount) Lsig() *LogicSig {
+// GetLsig returns the underlying LogicSig object
+func (lsa *LogicSigAccount) GetLsig() *LogicSig {
 	return wrapLogicSig(&lsa.wrapped.Lsig)
 }
 
-// SigningKey returns the key that provided Lsig.Sig, if any
-func (lsa *LogicSigAccount) SigningKey() []byte {
+// GetSigningKey returns the key that provided GetLsig.Sig, if any
+func (lsa *LogicSigAccount) GetSigningKey() []byte {
 	return lsa.wrapped.SigningKey
 }
 
@@ -157,7 +157,7 @@ func (lsa *LogicSigAccount) SetLsig(lsig *LogicSig) {
 	lsa.wrapped.Lsig = lsa.wrapped.Lsig
 }
 
-// SetSigningKey set the key that provided Lsig.Sig
+// SetSigningKey set the key that provided GetLsig.Sig
 func (lsa *LogicSigAccount) SetSigningKey(signingKey []byte) {
 	lsa.wrapped.SigningKey = signingKey
 }

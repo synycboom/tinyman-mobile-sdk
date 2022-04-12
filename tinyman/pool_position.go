@@ -94,23 +94,23 @@ func (a *PoolPosition) SetShare(value string) error {
 	return nil
 }
 
-// AssetAmount1 is an asset amount 1
-func (a *PoolPosition) AssetAmount1() *AssetAmount {
+// GetAssetAmount1 is an asset amount 1
+func (a *PoolPosition) GetAssetAmount1() *AssetAmount {
 	return wrapAssetAmount(&a.wrapped.Asset1)
 }
 
-// AssetAmount2 is an asset amount 2
-func (a *PoolPosition) AssetAmount2() *AssetAmount {
+// GetAssetAmount2 is an asset amount 2
+func (a *PoolPosition) GetAssetAmount2() *AssetAmount {
 	return wrapAssetAmount(&a.wrapped.Asset2)
 }
 
-// LiquidityAssetAmount is a asset asset amount
-func (a *PoolPosition) LiquidityAssetAmount() *AssetAmount {
+// GetLiquidityAssetAmount is a asset asset amount
+func (a *PoolPosition) GetLiquidityAssetAmount() *AssetAmount {
 	return wrapAssetAmount(&a.wrapped.LiquidityAsset)
 }
 
-// Share is a share of user which can be calculated as a percentage by (share * 100)
-func (a *PoolPosition) Share() string {
+// GetShare is a share of user which can be calculated as a percentage by (share * 100)
+func (a *PoolPosition) GetShare() string {
 	return strconv.FormatFloat(a.wrapped.Share, 'f', -1, 64)
 }
 

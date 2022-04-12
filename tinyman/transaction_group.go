@@ -103,8 +103,8 @@ func (tg *TransactionGroup) Submit(client *AlgodClient, wait bool) (string, erro
 	return tg.wrapped.Submit(context.Background(), client.wrapped, wait)
 }
 
-// TransactionIterator returns a transaction iterator
-func (tg *TransactionGroup) TransactionIterator() *TransactionIterator {
+// GetTransactionIterator returns a transaction iterator
+func (tg *TransactionGroup) GetTransactionIterator() *TransactionIterator {
 	var txs []*Transaction
 	for _, tx := range tg.wrapped.Transactions() {
 		tx := tx
@@ -114,8 +114,8 @@ func (tg *TransactionGroup) TransactionIterator() *TransactionIterator {
 	return &TransactionIterator{values: txs}
 }
 
-// SignedTransactionsIterator returns a signed transaction iterator
-func (tg *TransactionGroup) SignedTransactionsIterator() *SignedTransactionIterator {
+// GetSignedTransactionsIterator returns a signed transaction iterator
+func (tg *TransactionGroup) GetSignedTransactionsIterator() *SignedTransactionIterator {
 	var stxs [][]byte
 	for _, stx := range tg.wrapped.SignedTransactions() {
 		stx := stx

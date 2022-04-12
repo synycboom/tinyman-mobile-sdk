@@ -89,51 +89,51 @@ func (p *Pool) UpdateFromInfo(info *PoolInfo) error {
 	return p.wrapped.UpdateFromInfo(context.Background(), info.wrapped)
 }
 
-// MinimumBalance calculates minimum balance
+// GetMinimumBalance calculates minimum balance
 // The returned value is in uint64 formatted string
-func (p *Pool) MinimumBalance() string {
+func (p *Pool) GetMinimumBalance() string {
 	value := p.wrapped.MinimumBalance()
 
 	return strconv.FormatUint(value, 10)
 }
 
-// LogicSig returns a logic signature account
-func (p *Pool) LogicSig() (*LogicSigAccount, error) {
+// GetLogicSig returns a logic signature account
+func (p *Pool) GetLogicSig() (*LogicSigAccount, error) {
 	return poolLogicSigAccount(p.wrapped.ValidatorAppID, p.wrapped.Asset1.ID, p.wrapped.Asset2.ID)
 }
 
-// LiquidityAsset returns a liquidity asset
-func (p *Pool) LiquidityAsset() *Asset {
+// GetLiquidityAsset returns a liquidity asset
+func (p *Pool) GetLiquidityAsset() *Asset {
 	return wrapAsset(p.wrapped.LiquidityAsset)
 }
 
-// Asset1 returns an asset 1
-func (p *Pool) Asset1() *Asset {
+// GetAsset1 returns an asset 1
+func (p *Pool) GetAsset1() *Asset {
 	return wrapAsset(p.wrapped.Asset1)
 }
 
-// Asset2 returns an asset 2
-func (p *Pool) Asset2() *Asset {
+// GetAsset2 returns an asset 2
+func (p *Pool) GetAsset2() *Asset {
 	return wrapAsset(p.wrapped.Asset2)
 }
 
-// Address returns a logic signature address (pool address)
-func (p *Pool) Address() (string, error) {
+// GetAddress returns a logic signature address (pool address)
+func (p *Pool) GetAddress() (string, error) {
 	return p.wrapped.Address()
 }
 
-// Asset1Price returns asset1 price in string-formatted float64
-func (p *Pool) Asset1Price() string {
+// GetAsset1Price returns asset1 price in string-formatted float64
+func (p *Pool) GetAsset1Price() string {
 	return strconv.FormatFloat(p.wrapped.Asset1Price(), 'f', -1, 64)
 }
 
-// Asset2Price returns asset2 price in string-formatted float64
-func (p *Pool) Asset2Price() string {
+// GetAsset2Price returns asset2 price in string-formatted float64
+func (p *Pool) GetAsset2Price() string {
 	return strconv.FormatFloat(p.wrapped.Asset2Price(), 'f', -1, 64)
 }
 
-// Info returns pool information
-func (p *Pool) Info() (*PoolInfo, error) {
+// GetInfo returns pool information
+func (p *Pool) GetInfo() (*PoolInfo, error) {
 	info, err := p.wrapped.Info()
 	if err != nil {
 		return nil, err

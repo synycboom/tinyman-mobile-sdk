@@ -76,13 +76,13 @@ func (a *AssetAmount) SetAmount(value string) error {
 	return nil
 }
 
-// Asset returns an asset
-func (a *AssetAmount) Asset() *Asset {
+// GetAsset returns an asset
+func (a *AssetAmount) GetAsset() *Asset {
 	return wrapAsset(a.wrapped.Asset)
 }
 
-// AssetAmount returns an asset by converting the underlying 64-bit unsigned integer to a string
-func (a *AssetAmount) AssetAmount() string {
+// GetAmount returns an asset by converting the underlying 64-bit unsigned integer to a string
+func (a *AssetAmount) GetAmount() string {
 	return strconv.FormatUint(a.wrapped.Amount, 10)
 }
 

@@ -66,22 +66,22 @@ func (a *Asset) SetUnitName(value string) {
 	a.wrapped.UnitName = value
 }
 
-// ID returns an id of the asset by converting a 64-bit unsigned integer to a string
-func (a *Asset) ID() string {
+// GetId returns an id of the asset by converting a 64-bit unsigned integer to a string
+func (a *Asset) GetId() string {
 	return strconv.FormatUint(a.wrapped.ID, 10)
 }
 
-// Decimals returns a decimals of the asset by converting a 64-bit unsigned integer to a string
-func (a *Asset) Decimals() string {
+// GetDecimals returns a decimals of the asset by converting a 64-bit unsigned integer to a string
+func (a *Asset) GetDecimals() string {
 	return strconv.FormatUint(a.wrapped.Decimals, 10)
 }
 
-// Name returns a name of the asset
-func (a *Asset) Name() string {
+// GetName returns a name of the asset
+func (a *Asset) GetName() string {
 	return a.wrapped.Name
 }
 
-// UnitName returns a unit name of the asset
-func (a *Asset) UnitName() string {
+// GetUnitName returns a unit name of the asset
+func (a *Asset) GetUnitName() string {
 	return a.wrapped.UnitName
 }

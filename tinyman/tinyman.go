@@ -157,8 +157,8 @@ func (c *Client) IsAssetOptedIn(assetID string, userAddress string) (bool, error
 	return c.wrapped.IsAssetOptedIn(context.Background(), uintAssetID, userAddress)
 }
 
-// Balance returns an asset balance of a user
-func (c *Client) Balance(asset *Asset, userAddress string) (*AssetAmount, error) {
+// FetchBalance returns an asset balance of a user
+func (c *Client) FetchBalance(asset *Asset, userAddress string) (*AssetAmount, error) {
 	if asset == nil {
 		return nil, fmt.Errorf("asset is required")
 	}
@@ -171,12 +171,12 @@ func (c *Client) Balance(asset *Asset, userAddress string) (*AssetAmount, error)
 	return &AssetAmount{wrapped: a}, nil
 }
 
-// ValidatorAppID returns a validator app id
-func (c *Client) ValidatorAppID() string {
+// GetValidatorAppID returns a validator app id
+func (c *Client) GetValidatorAppID() string {
 	return strconv.FormatUint(c.wrapped.ValidatorAppID, 10)
 }
 
-// UserAddress returns a user address attached to the client
-func (c *Client) UserAddress() string {
+// GetUserAddress returns a user address attached to the client
+func (c *Client) GetUserAddress() string {
 	return c.wrapped.UserAddress
 }

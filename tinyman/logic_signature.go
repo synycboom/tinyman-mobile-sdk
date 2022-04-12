@@ -52,7 +52,7 @@ func (lsig *LogicSig) Blank() bool {
 }
 
 // Logic signed by Sig or Msig
-// OR hashed to be the Address of an account.
+// OR hashed to be the GetAddress of an account.
 func (lsig *LogicSig) Logic() []byte {
 	return lsig.wrapped.Logic
 }

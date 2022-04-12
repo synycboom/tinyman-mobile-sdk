@@ -11,33 +11,33 @@ type SwapQuote struct {
 	wrapped *types.SwapQuote
 }
 
-// SwapType returns a swap type
-func (s *SwapQuote) SwapType() string {
+// GetSwapType returns a swap type
+func (s *SwapQuote) GetSwapType() string {
 	return s.wrapped.SwapType
 }
 
-// AmountIn returns an input asset amount
-func (s *SwapQuote) AmountIn() *AssetAmount {
+// GetAssetAmountIn returns an input asset amount
+func (s *SwapQuote) GetAssetAmountIn() *AssetAmount {
 	return wrapAssetAmount(s.wrapped.AmountIn)
 }
 
-// AmountOut returns an output asset amount
-func (s *SwapQuote) AmountOut() *AssetAmount {
+// GetAssetAmountOut returns an output asset amount
+func (s *SwapQuote) GetAssetAmountOut() *AssetAmount {
 	return wrapAssetAmount(s.wrapped.AmountOut)
 }
 
-// SwapFee returns a swap fee asset amount
-func (s *SwapQuote) SwapFee() *AssetAmount {
+// GetSwapFeeAssetAmount returns a swap fee asset amount
+func (s *SwapQuote) GetSwapFeeAssetAmount() *AssetAmount {
 	return wrapAssetAmount(s.wrapped.SwapFee)
 }
 
-// Slippage returns a slippage
-func (s *SwapQuote) Slippage() string {
+// GetSlippage returns a slippage
+func (s *SwapQuote) GetSlippage() string {
 	return strconv.FormatFloat(s.wrapped.Slippage, 'f', -1, 64)
 }
 
-// AssetAmountOutWithSlippage returns a calculated output asset amount after applying the slippage
-func (s *SwapQuote) AssetAmountOutWithSlippage() (*AssetAmount, error) {
+// GetAssetAmountOutWithSlippage returns a calculated output asset amount after applying the slippage
+func (s *SwapQuote) GetAssetAmountOutWithSlippage() (*AssetAmount, error) {
 	a, err := s.wrapped.AmountOutWithSlippage()
 	if err != nil {
 		return nil, err
@@ -46,8 +46,8 @@ func (s *SwapQuote) AssetAmountOutWithSlippage() (*AssetAmount, error) {
 	return wrapAssetAmount(a), nil
 }
 
-// AssetAmountInWithSlippage returns a calculated input asset amount after applying the slippage
-func (s *SwapQuote) AssetAmountInWithSlippage() (*AssetAmount, error) {
+// GetAssetAmountInWithSlippage returns a calculated input asset amount after applying the slippage
+func (s *SwapQuote) GetAssetAmountInWithSlippage() (*AssetAmount, error) {
 	a, err := s.wrapped.AmountInWithSlippage()
 	if err != nil {
 		return nil, err
@@ -56,13 +56,13 @@ func (s *SwapQuote) AssetAmountInWithSlippage() (*AssetAmount, error) {
 	return wrapAssetAmount(a), nil
 }
 
-// Price returns the price, the value is converted from float64 to string
-func (s *SwapQuote) Price() string {
+// GetPrice returns the price, the value is converted from float64 to string
+func (s *SwapQuote) GetPrice() string {
 	return strconv.FormatFloat(s.wrapped.Price(), 'f', -1, 64)
 }
 
-// PriceWithSlippage returns the price after applying the slippage, the value is converted from float64 to string
-func (s *SwapQuote) PriceWithSlippage() (string, error) {
+// GetPriceWithSlippage returns the price after applying the slippage, the value is converted from float64 to string
+func (s *SwapQuote) GetPriceWithSlippage() (string, error) {
 	value, err := s.wrapped.PriceWithSlippage()
 	if err != nil {
 		return "", err

@@ -138,7 +138,7 @@ func (ma *MultiSigAccount) Validate() (err error) {
 }
 
 // Blank return true if MultiSigAccount is empty
-// struct containing []ed25519.PublicKey cannot be compared
+// struct containing []ed25519.GetPublicKey cannot be compared
 func (ma *MultiSigAccount) Blank() bool {
 	return ma.wrapped.Blank()
 }
