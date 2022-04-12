@@ -49,3 +49,17 @@ func (r *RedeemQuote) GetAssetAmount() *AssetAmount {
 func (r *RedeemQuote) GetPoolAddress() string {
 	return r.wrapped.PoolAddress
 }
+
+// IsNullRedeemQuote returns true if redeem quote is null
+// This utility function is created because Swift somehow misinterpret objective-c nullable in some cases
+func IsNullRedeemQuote(value *RedeemQuote) bool {
+	if value == nil {
+		return true
+	}
+
+	if value.wrapped == nil {
+		return true
+	}
+
+	return false
+}
