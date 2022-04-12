@@ -2,7 +2,7 @@ SRC_PATH := $(shell pwd)
 MODULE := github.com/synycboom/tinyman-mobile-sdk/tinyman
 GO_MOBILE := golang.org/x/mobile/cmd/gomobile
 
-IOS_BUILD_PATH := $(SRC_PATH)/build/ios
+IOS_BUILD_PATH := $(SRC_PATH)/example/ios/tinyman-example/Frameworks
 IOS_BUILD_FILE := $(IOS_BUILD_PATH)/Tinyman.xcframework
 
 ANDROID_BUILD_PATH := $(SRC_PATH)/example/android/app/libs
@@ -64,7 +64,7 @@ init:
 
 build.ios:
 	mkdir -p $(IOS_BUILD_PATH)
-	go run $(GO_MOBILE) bind -target=ios -o $(IOS_BUILD_FILE) $(MODULE)
+	GOARCH=amd64 go run $(GO_MOBILE) bind -target=ios -o $(IOS_BUILD_FILE) $(MODULE)
 
 build.android:
 	mkdir -p $(ANDROID_BUILD_PATH)
