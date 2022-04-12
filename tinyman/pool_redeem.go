@@ -60,6 +60,10 @@ func (p *Pool) FilterRedeemQuotes(iter *RedeemQuoteIterator) (*RedeemQuoteIterat
 		wrappedQuotes = append(wrappedQuotes, &RedeemQuote{wrapped: &quote})
 	}
 
+	if len(wrappedQuotes) == 0 {
+		return nil, nil
+	}
+
 	return &RedeemQuoteIterator{
 		values: wrappedQuotes,
 	}, nil
@@ -86,6 +90,10 @@ func (p *Pool) GetRedeemQuoteMatchesAssetID(assetID string, iter *RedeemQuoteIte
 	quote, err := p.wrapped.GetRedeemQuoteMatchesAssetID(uintAssetID, quotes)
 	if err != nil {
 		return nil, err
+	}
+
+	if quote == nil {
+		return nil, nil
 	}
 
 	return &RedeemQuote{
