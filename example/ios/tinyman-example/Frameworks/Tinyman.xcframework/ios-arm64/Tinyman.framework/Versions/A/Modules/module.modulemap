@@ -1,0 +1,8 @@
+framework module "Tinyman" {
+	header "ref.h"
+    header "Tinyman.objc.h"
+    header "Universe.objc.h"
+    header "Tinyman.h"
+
+    export *
+}
