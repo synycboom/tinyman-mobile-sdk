@@ -12,7 +12,7 @@ class SDKViewModel(): ViewModel(){
             try {
                 val msg = withContext(Dispatchers.IO) {
                     val account = getAccount()
-                    val userAddress = account.address()
+                    val userAddress = account.address
                     // Create algorand and tinyman clients
                     val (algodClient, _) = createClients(userAddress)
 
@@ -34,7 +34,7 @@ class SDKViewModel(): ViewModel(){
             try {
                 val msg = withContext(Dispatchers.IO) {
                     val account = getAccount()
-                    val userAddress = account.address()
+                    val userAddress = account.address
                     val (algodClient, tinymanClient) = createClients(userAddress)
 
                     // Check whether the user already opted in the app or not, if not let the user opt in
@@ -55,14 +55,14 @@ class SDKViewModel(): ViewModel(){
                         token,
                         algo,
                         null,
-                        tinymanClient.validatorAppID(),
-                        account.address(),
+                        tinymanClient.validatorAppID,
+                        account.address,
                         true
                     )
 
                     // Prepare a transaction group for bootstrapping
                     // Note that some transactions need to be signed with LogicSig account, and they were signed in the function.
-                    val txGroup = pool.prepareBootstrapTransactions(account.address())
+                    val txGroup = pool.prepareBootstrapTransactions(account.address)
 
                     // Some transactions that need the user signatures are signed here
                     txGroup.sign(account)
@@ -86,7 +86,7 @@ class SDKViewModel(): ViewModel(){
                 val msg = withContext(Dispatchers.IO) {
                     var msg = ""
                     val account = getAccount()
-                    val userAddress = account.address()
+                    val userAddress = account.address
                     val (algodClient, tinymanClient) = createClients(userAddress)
 
                     // Check whether the user already opted in the app or not, if not let the user opt in
@@ -102,10 +102,10 @@ class SDKViewModel(): ViewModel(){
                     val algo = tinymanClient.fetchAsset("0")
 
                     // Fetch TOKEN-ALGO pool
-                    val pool = tinyman.Pool(algodClient, token, algo, null, tinymanClient.validatorAppID(), account.address(), true)
+                    val pool = tinyman.Pool(algodClient, token, algo, null, tinymanClient.validatorAppID, account.address, true)
 
                     // Check whether the user already opted in for the liquidity asset or not, if not let the user opt in
-                    optInAssetIfNeeded(tinymanClient, account, pool.liquidityAsset().id())
+                    optInAssetIfNeeded(tinymanClient, account, pool.liquidityAsset.id)
 
                     val tokenAssetAmount = tinyman.AssetAmount()
 
@@ -127,10 +127,10 @@ class SDKViewModel(): ViewModel(){
                     val quote = pool.fetchMintQuote(tokenAssetAmount, algoAssetAmount, "0.05")
 
                     // Calculate the liquidity asset amount after applying the slippage
-                    val liquidityAssetAmountWithSlippage = quote.liquidityAssetAmountWithSlippage()
+                    val liquidityAssetAmountWithSlippage = quote.liquidityAssetAmountWithSlippage
 
-                    msg += "Liquidity asset amount: ID-${quote.liquidityAssetAmount().asset().id()} = ${quote.liquidityAssetAmount().assetAmount()}\n"
-                    msg += "Liquidity asset amount with slippage: ID-${liquidityAssetAmountWithSlippage.asset().id()} = ${liquidityAssetAmountWithSlippage.assetAmount()}\n"
+                    msg += "Liquidity asset amount: ID-${quote.liquidityAssetAmount.asset.id} = ${quote.liquidityAssetAmount.amount}\n"
+                    msg += "Liquidity asset amount with slippage: ID-${liquidityAssetAmountWithSlippage.asset.id} = ${liquidityAssetAmountWithSlippage.amount}\n"
 
                     // Prepare a transaction group for minting
                     // Note that some transactions need to be signed with LogicSig account, and they were signed in the function.
@@ -145,11 +145,11 @@ class SDKViewModel(): ViewModel(){
                     msg += "Liquidity was added in txid $txId\n"
 
                     val info = pool.fetchPoolPosition(userAddress)
-                    val share = info.share().toBigDecimal().multiply(BigDecimal("100"))
+                    val share = info.share.toBigDecimal().multiply(BigDecimal("100"))
 
-                    msg += "Pool tokens: ID-${info.liquidityAssetAmount().asset().id()} = ${info.liquidityAssetAmount().assetAmount()}\n"
-                    msg += "Asset1: ID-${info.assetAmount1().asset().id()} = ${info.assetAmount1().assetAmount()}\n"
-                    msg += "Asset2: ID-${info.assetAmount2().asset().id()} = ${info.assetAmount2().assetAmount()}\n"
+                    msg += "Pool tokens: ID-${info.liquidityAssetAmount.asset.id} = ${info.liquidityAssetAmount.amount}\n"
+                    msg += "Asset1: ID-${info.assetAmount1.asset.id} = ${info.assetAmount1.amount}\n"
+                    msg += "Asset2: ID-${info.assetAmount2.asset.id} = ${info.assetAmount2.amount}\n"
                     msg += "Share of pool: ${share}%"
 
                     msg
@@ -168,7 +168,7 @@ class SDKViewModel(): ViewModel(){
                 val msg = withContext(Dispatchers.IO) {
                     var msg = ""
                     val account = getAccount()
-                    val userAddress = account.address()
+                    val userAddress = account.address
                     val (algodClient, tinymanClient) = createClients(userAddress)
 
                     // Check whether the user already opted in the app or not, if not let the user opt in
@@ -184,17 +184,17 @@ class SDKViewModel(): ViewModel(){
                     val algo = tinymanClient.fetchAsset("0")
 
                     // Fetch TOKEN-ALGO pool
-                    val pool = tinyman.Pool(algodClient, token, algo, null, tinymanClient.validatorAppID(), account.address(), true)
+                    val pool = tinyman.Pool(algodClient, token, algo, null, tinymanClient.validatorAppID, account.address, true)
 
                     // Check whether the user already opted in for the liquidity asset or not, if not let the user opt in
-                    optInAssetIfNeeded(tinymanClient, account, pool.info().liquidityAssetID())
+                    optInAssetIfNeeded(tinymanClient, account, pool.info.liquidityAssetID)
 
                     // Fetch total balance of liquidtiy asset that the user has
-                    val balance = tinymanClient.balance(pool.liquidityAsset(), userAddress)
+                    val balance = tinymanClient.fetchBalance(pool.liquidityAsset, userAddress)
 
-                    msg += "Current balance of liquidity \n\t - ID:${pool.liquidityAsset().id()} = ${balance.assetAmount()}\n"
+                    msg += "Current balance of liquidity \n\t - ID:${pool.liquidityAsset.id} = ${balance.amount}\n"
 
-                    if (balance.assetAmount().toBigInteger().equals(0)) {
+                    if (balance.amount.toBigInteger().equals(0)) {
                         msg += "User does not have liquidity balance\n"
 
                         return@withContext msg
@@ -203,11 +203,11 @@ class SDKViewModel(): ViewModel(){
                     // Fetch burn quote used when burning liquidity asset with slippage equals 0.05
                     val quote = pool.fetchBurnQuote(balance, "0.05")
 
-                    msg += "Liquidity asset amount \n\t - ID-${quote.liquidityAssetAmount().asset().id()} = ${quote.liquidityAssetAmount().assetAmount()}\n"
+                    msg += "Liquidity asset amount \n\t - ID-${quote.liquidityAssetAmount.asset.id} = ${quote.liquidityAssetAmount.amount}\n"
                     msg += "Output amounts\n"
-                    msg += displayAmountOut(quote.assetAmountsOutIterator())
+                    msg += displayAmountOut(quote.assetAmountsOutIterator)
                     msg += "Output amounts with slippage\n"
-                    msg += displayAmountOut(quote.assetAmountsOutWithSlippageIterator())
+                    msg += displayAmountOut(quote.assetAmountsOutWithSlippageIterator)
 
                     // Prepare a transaction group for burning
                     // Note that some transactions need to be signed with LogicSig account, and they were signed in the function.
@@ -222,11 +222,11 @@ class SDKViewModel(): ViewModel(){
                     msg += "Liquidity was removed in txid $txId\n"
 
                     val info = pool.fetchPoolPosition(userAddress)
-                    val share = info.share().toBigDecimal().multiply(BigDecimal("100"))
+                    val share = info.share.toBigDecimal().multiply(BigDecimal("100"))
 
-                    msg += "Pool tokens: ID-${info.liquidityAssetAmount().asset().id()} = ${info.liquidityAssetAmount().assetAmount()}\n"
-                    msg += "Asset1: ID-${info.assetAmount1().asset().id()} = ${info.assetAmount1().assetAmount()}\n"
-                    msg += "Asset2: ID-${info.assetAmount2().asset().id()} = ${info.assetAmount2().assetAmount()}\n"
+                    msg += "Pool tokens: ID-${info.liquidityAssetAmount.asset.id} = ${info.liquidityAssetAmount.amount}\n"
+                    msg += "Asset1: ID-${info.assetAmount1.asset.id} = ${info.assetAmount1.amount}\n"
+                    msg += "Asset2: ID-${info.assetAmount2.asset.id} = ${info.assetAmount2.amount}\n"
                     msg += "Share of pool: ${share}%"
 
                     msg
@@ -245,7 +245,7 @@ class SDKViewModel(): ViewModel(){
                 val msg = withContext(Dispatchers.IO) {
                     var msg = ""
                     val account = getAccount()
-                    val userAddress = account.address()
+                    val userAddress = account.address
                     val (algodClient, tinymanClient) = createClients(userAddress)
 
                     // Check whether the user already opted in the app or not, if not let the user opt in
@@ -261,10 +261,10 @@ class SDKViewModel(): ViewModel(){
                     val algo = tinymanClient.fetchAsset("0")
 
                     // Fetch TOKEN-ALGO pool
-                    val pool = tinyman.Pool(algodClient, token, algo, null, tinymanClient.validatorAppID(), account.address(), true)
+                    val pool = tinyman.Pool(algodClient, token, algo, null, tinymanClient.validatorAppID, account.address, true)
 
                     // Check whether the user already opted in for the liquidity asset or not, if not let the user opt in
-                    optInAssetIfNeeded(tinymanClient, account, pool.liquidityAsset().id())
+                    optInAssetIfNeeded(tinymanClient, account, pool.liquidityAsset.id)
 
                     val tokenAssetAmount = tinyman.AssetAmount()
 
@@ -278,14 +278,14 @@ class SDKViewModel(): ViewModel(){
                     val quote = pool.fetchFixedInputSwapQuote(tokenAssetAmount, "0.05")
 
                     // Calculate price after applying the slippage
-                    val priceWithSlippage = quote.priceWithSlippage()
+                    val priceWithSlippage = quote.priceWithSlippage
 
                     // Calculate output amount after applying the slippage
-                    val amountOutWithSlippage = quote.assetAmountOutWithSlippage()
+                    val amountOutWithSlippage = quote.assetAmountOutWithSlippage
 
-                    msg += "ID-${token.id()} per ALGO: ${quote.price()}\n"
-                    msg += "ID-${token.id()} per ALGO (worst case): ${priceWithSlippage}\n"
-                    msg += "Swapping ID-${quote.amountIn().asset().id()} = ${quote.amountIn().assetAmount()} to ID-${amountOutWithSlippage.asset().id()} = ${amountOutWithSlippage.assetAmount()}\n"
+                    msg += "ID-${token.id} per ALGO: ${quote.price}\n"
+                    msg += "ID-${token.id} per ALGO (worst case): ${priceWithSlippage}\n"
+                    msg += "Swapping ID-${quote.assetAmountIn.asset.id} = ${quote.assetAmountIn.amount} to ID-${amountOutWithSlippage.asset.id} = ${amountOutWithSlippage.amount}\n"
 
                     // Prepare a transaction group for swappingg
                     // Note that some transactions need to be signed with LogicSig account, and they were signed in the function.
@@ -315,7 +315,7 @@ class SDKViewModel(): ViewModel(){
                 val msg = withContext(Dispatchers.IO) {
                     var msg = ""
                     val account = getAccount()
-                    val userAddress = account.address()
+                    val userAddress = account.address
                     val (algodClient, tinymanClient) = createClients(userAddress)
 
                     // Check whether the user already opted in the app or not, if not let the user opt in
@@ -331,7 +331,7 @@ class SDKViewModel(): ViewModel(){
                     val algo = tinymanClient.fetchAsset("0")
 
                     // Fetch TOKEN-ALGO pool
-                    val pool = tinyman.Pool(algodClient, token, algo, null, tinymanClient.validatorAppID(), account.address(), true)
+                    val pool = tinyman.Pool(algodClient, token, algo, null, tinymanClient.validatorAppID, account.address, true)
 
                     // Fetch excess amount resulting from the swap
                     val redeemQuoteIterator = tinymanClient.fetchExcessAmount(userAddress)
@@ -344,7 +344,7 @@ class SDKViewModel(): ViewModel(){
                         return@withContext msg
                     }
 
-                    msg += "There is ID-${quote.assetAmount().asset().id()} = ${quote.assetAmount().assetAmount()} to be redeemed\n"
+                    msg += "There is ID-${quote.assetAmount.asset.id} = ${quote.assetAmount.amount} to be redeemed\n"
 
                     // Prepare a transaction group for redeeming
                     // Note that some transactions need to be signed with LogicSig account, and they were signed in the function.
@@ -373,7 +373,7 @@ fun displayAmountOut(outputAmountsWithSlippageIter: AssetAmountIterator): String
     var msg = ""
     while (outputAmountsWithSlippageIter.hasNext()) {
         val asset = outputAmountsWithSlippageIter.next()
-        msg += "\t - ID:${asset.asset().id()} = ${asset.assetAmount()}\n"
+        msg += "\t - ID:${asset.asset.id} = ${asset.amount}\n"
     }
 
     return msg

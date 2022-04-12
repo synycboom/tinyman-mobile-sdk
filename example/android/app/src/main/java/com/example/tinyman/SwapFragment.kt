@@ -29,7 +29,7 @@ class SwapFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.textviewOutput.text = "This example add liquidity with a given asset id and ALGO token"
+        binding.textviewOutput.text = "This example swap an asset id for ALGO token"
         binding.buttonSwap.setOnClickListener {
             val asset1Id = binding.editTextAsset1Id.text
             if (asset1Id.isEmpty()) {

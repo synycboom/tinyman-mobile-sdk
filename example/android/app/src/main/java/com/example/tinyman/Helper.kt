@@ -26,7 +26,7 @@ fun getAccount(): Account {
 }
 
 fun optInAppIfNeeded(tinymanClient: Client, account: Account) {
-    val userAddress = account.address()
+    val userAddress = account.address
     val isOptedIn = tinymanClient.isOptedIn(userAddress)
     if (isOptedIn) {
         return
@@ -44,7 +44,7 @@ fun optInAppIfNeeded(tinymanClient: Client, account: Account) {
 }
 
 fun optInAssetIfNeeded(tinymanClient: Client, account: Account, assetId: String) {
-    val userAddress = account.address()
+    val userAddress = account.address
     val isOptedIn = tinymanClient.isAssetOptedIn(assetId, userAddress)
     if (isOptedIn) {
         return
@@ -64,6 +64,6 @@ fun optInAssetIfNeeded(tinymanClient: Client, account: Account, assetId: String)
 fun createTestAsset(account: Account, ac: AlgodClient): String {
     val uuid = UUID.randomUUID().toString().substring(0, 5)
     return Tinyman.createAnAsset(
-        "sdk-test-$uuid", "st", "6", "1000000000", account.address(), account, ac,
+        "sdk-test-$uuid", "st", "6", "1000000000", account.address, account, ac,
     )
 }

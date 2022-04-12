@@ -10,19 +10,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.tinyman.databinding.FragmentCreateAnAssetBinding
 import java.lang.Exception
 
-fun createAsset(): String {
-    val account = getAccount()
-    val userAddress = account.address()
-    // Create algorand and tinyman clients
-    val (algodClient, _) = createClients(userAddress)
-
-    // Create a new asset
-    val assetId = createTestAsset(account, algodClient)
-    val msg = "Created an asset with id=$assetId, please copy this id and use it in other examples!"
-
-    return msg
-}
-
 class CreateAnAssetFragment : Fragment() {
 
     private var _binding: FragmentCreateAnAssetBinding? = null
