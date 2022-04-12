@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.tinyman.databinding.FragmentBootstrapBinding
-import java.lang.Exception
 
 class BootstrapFragment : Fragment() {
 

@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.tinyman.databinding.FragmentCreateAnAssetBinding
-import java.lang.Exception
 
 class CreateAnAssetFragment : Fragment() {
 

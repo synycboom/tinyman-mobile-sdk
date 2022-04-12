@@ -9,8 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.tinyman.databinding.FragmentBurnBinding
-import tinyman.AssetAmountIterator
-import java.lang.Exception
 
 class BurnFragment : Fragment() {
     private var _binding: FragmentBurnBinding? = null
