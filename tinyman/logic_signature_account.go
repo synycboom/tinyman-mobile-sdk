@@ -147,7 +147,7 @@ func (lsa *LogicSigAccount) GetLsig() *LogicSig {
 	return wrapLogicSig(&lsa.wrapped.Lsig)
 }
 
-// GetSigningKey returns the key that provided GetLsig.Sig, if any
+// GetSigningKey returns the key that provided GetLsig.GetSig, if any
 func (lsa *LogicSigAccount) GetSigningKey() []byte {
 	return lsa.wrapped.SigningKey
 }
@@ -157,7 +157,7 @@ func (lsa *LogicSigAccount) SetLsig(lsig *LogicSig) {
 	lsa.wrapped.Lsig = lsa.wrapped.Lsig
 }
 
-// SetSigningKey set the key that provided GetLsig.Sig
+// SetSigningKey set the key that provided GetLsig.GetSig
 func (lsa *LogicSigAccount) SetSigningKey(signingKey []byte) {
 	lsa.wrapped.SigningKey = signingKey
 }

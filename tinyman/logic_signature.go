@@ -45,30 +45,30 @@ type LogicSig struct {
 	wrapped *algoTypes.LogicSig
 }
 
-// Blank returns true iff the lsig is empty. We need this instead of just
+// IsBlank returns true iff the lsig is empty. We need this instead of just
 // comparing with == LogicSig{}, because it contains slices.
-func (lsig *LogicSig) Blank() bool {
+func (lsig *LogicSig) IsBlank() bool {
 	return lsig.wrapped.Blank()
 }
 
-// Logic signed by Sig or Msig
+// GetLogic returns Logic signed by GetSig or GetMsig
 // OR hashed to be the GetAddress of an account.
-func (lsig *LogicSig) Logic() []byte {
+func (lsig *LogicSig) GetLogic() []byte {
 	return lsig.wrapped.Logic
 }
 
-// The signature of the account that has delegated to this LogicSig, if any
-func (lsig *LogicSig) Sig() *Signature {
+// GetSig returns the signature of the account that has delegated to this LogicSig, if any
+func (lsig *LogicSig) GetSig() *Signature {
 	return wrapSig(&lsig.wrapped.Sig)
 }
 
-// The signature of the multisig account that has delegated to this LogicSig, if any
-func (lsig *LogicSig) Msig() *MultisigSig {
+// GetMsig returns the signature of the multisig account that has delegated to this LogicSig, if any
+func (lsig *LogicSig) GetMsig() *MultisigSig {
 	return wrapMultisigSigsig(&lsig.wrapped.Msig)
 }
 
-// Args returns LogicSigArgsIterator
-func (lsig *LogicSig) Args() *LogicSigArgsIterator {
+// GetArgs returns LogicSigArgsIterator
+func (lsig *LogicSig) GetArgs() *LogicSigArgsIterator {
 	var values [][]byte
 	for _, value := range lsig.wrapped.Args {
 		value := value
