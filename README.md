@@ -18,6 +18,9 @@ You can download libraries for iOS and Android from [releases](https://github.co
 
 `misc` contains a release script
 
+# Video Demo
+https://youtu.be/tDIdXhrh7ks
+
 # Usage
 See [example](https://github.com/synycboom/tinyman-mobile-sdk//tree/master/example) for how to integrate this SDK with both iOS and Android.
 
